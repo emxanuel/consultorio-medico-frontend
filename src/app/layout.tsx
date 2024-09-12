@@ -2,11 +2,13 @@ import type { Metadata } from "next";
 import { Poppins } from "next/font/google"
 
 import "primereact/resources/themes/lara-light-blue/theme.css";
-import Providers from "@/components/Providers";
+import Providers from "./providers";
 
 const poppins = Poppins({ subsets: ["latin"], weight: "400" });
 
 import "./globals.css";
+import Navbar from "@/components/Navbar";
+import { NextUIProvider } from "@nextui-org/react";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -21,11 +23,14 @@ export default function RootLayout({
   return (
     <html lang="es">
       <body
-        className={`${poppins.className}`}
+        className={`${poppins.className} flex flex-col`}
       >
-        <Providers>
-          {children}
-        </Providers>
+        <NextUIProvider>
+          <Providers>
+            <Navbar />
+            {children}
+          </Providers>
+        </NextUIProvider>
       </body>
     </html>
   );

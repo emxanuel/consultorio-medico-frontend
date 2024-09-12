@@ -1,0 +1,19 @@
+.container{
+    display: flex;
+    flex-direction: column;
+    width: 40rem;
+    padding: 6px 12px;
+    width: 100%;
+}
+.infoContainer h2 {
+    display: flex;
+    width: 100%;
+    gap: 10px;
+    justify-content: space-between;
+}
+
+.buttonsContainer {
+    display: flex;
+    gap: 10px;
+    justify-content: flex-end;
+}

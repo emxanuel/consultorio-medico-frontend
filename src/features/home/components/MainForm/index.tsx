@@ -1,15 +1,17 @@
 "use client"
 
+import { Button } from '@nextui-org/button'
+import { Input } from '@nextui-org/input'
+import { Select } from '@nextui-org/select'
+import { SelectItem } from '@nextui-org/select'
+import { DatePicker } from '@nextui-org/date-picker'
+// import { Input, Select, SelectItem } from '@nextui-org/react'
 import { ChangeEvent, useEffect, useState } from 'react'
-import { InputText } from 'primereact/inputtext'
-import { Dropdown } from 'primereact/dropdown'
 import { FormData } from '@/types'
-import { InputNumber } from 'primereact/inputnumber'
 import { MaritalStatus, PrimaryInsuredRelationship, Gender } from '@/types'
 
 import styles from './styles.module.css'
 import { RadioButton } from 'primereact/radiobutton'
-import { Button } from 'primereact/button'
 
 
 export default function MainForm() {
@@ -67,40 +69,42 @@ export default function MainForm() {
             <div className={styles.personalInformation}>
                 <h1 className='text-xl'>Información del paciente</h1>
                 <div className={styles.inputs}>
-                    <InputText onChange={handleChange} name='firstName' placeholder='Nombre del paciente' />
-                    <InputText onChange={handleChange} name='lastName' placeholder='Apellido' />
-                    <InputNumber inputClassName='border border-[#ccc] rounded-md bg-white px-[20px] py-[10px]' className='' placeholder='Edad' max={120} />
-                    <div className='flex flex-col'>
-                        <label>Genero</label>
-                        <Dropdown className='border border-[#ccc]' value={formData.gender} options={genders} onChange={(e) => setFormData({ ...formData, gender: e.value })} optionLabel='Genero' defaultValue='Masculino' />
-                    </div>
-                    <div className='flex flex-col'>
-                        <label>Estado Civil</label>
-                        <Dropdown className='border border-[#ccc]' value={formData.maritalStatus} options={maritalStatuses} onChange={(e) => setFormData({ ...formData, maritalStatus: e.value })} optionLabel='Estado civil' />
-                    </div>
+                    <Input onChange={handleChange} name='firstName' placeholder='Nombre del paciente' aria-label='Nombre del paciente' />
+                    <Input onChange={handleChange} name='lastName' placeholder='Apellido' aria-label='Apellido' />
+                    <Input type='number' placeholder='Edad' max={120} aria-label='Edad' />
+                    <Select className='border border-[#ccc]' value={formData.gender} onChange={(e) => setFormData({ ...formData, gender: e.target.value as Gender })} placeholder='Genero' aria-label='Genero'>
+                        {genders.map(g => (
+                            <SelectItem key={g} value={g}>{g}</SelectItem>
+                        ))}
+                    </Select>
+                    <Select className='border border-[#ccc]' value={formData.maritalStatus} onChange={(e) => setFormData({ ...formData, maritalStatus: e.target.value as MaritalStatus })} placeholder='Estado civil' aria-label='Estado civil'>
+                        {maritalStatuses.map(m => (
+                            <SelectItem key={m} value={m}>{m}</SelectItem>
+                        ))}
+                    </Select>
                     <div className='flex flex-col '>
                         <label>Fecha de nacimiento</label>
-                        <input type="date" className='bg-white px-2 rounded-md border border-[#ccc] h-full'/>
+                        <DatePicker onChange={(e) => setFormData({ ...formData, birthDate: e.toDate('en_us').toDateString() })} aria-label='Fecha de nacimiento' />
                     </div>
-                    <InputText onChange={handleChange} name='birthPlace' placeholder='Lugar de nacimiento' />
-                    <InputText onChange={handleChange} name='nationality' placeholder='Nacionalidad' />
-                    <InputText onChange={handleChange} name='religion' placeholder='Religion' />
-                    <InputText onChange={handleChange} name='ocupation' placeholder='Ocupacion' />
-                    <InputText onChange={handleChange} name='documentId' placeholder='Cedula' />
-                    <InputText onChange={handleChange} name='address' placeholder='Direccion' />
-                    <InputText onChange={handleChange} name='residentialPhone' placeholder='Telefono residencial' />
-                    <InputText onChange={handleChange} name='cellphone' placeholder='Celular' />
+                    <Input onChange={handleChange} name='birthPlace' placeholder='Lugar de nacimiento' aria-label='Lugar de nacimiento' />
+                    <Input onChange={handleChange} name='nationality' placeholder='Nacionalidad' aria-label='Nacionalidad' />
+                    <Input onChange={handleChange} name='religion' placeholder='Religion' aria-label='Religion' />
+                    <Input onChange={handleChange} name='ocupation' placeholder='Ocupacion' aria-label='Ocupacion' />
+                    <Input onChange={handleChange} name='documentId' placeholder='Cedula' aria-label='Cedula' />
+                    <Input onChange={handleChange} name='address' placeholder='Direccion' aria-label='Direccion' />
+                    <Input onChange={handleChange} name='residentialPhone' placeholder='Telefono residencial' aria-label='Telefono residencial' />
+                    <Input onChange={handleChange} name='cellphone' placeholder='Celular' aria-label='Celular' />
                 </div>
 
             </div>
             <div className={styles.emergencyContact}>
                 <h1 className='text-xl'>Contacto de emergencia</h1>
                 <div className={styles.inputs}>
-                    <InputText onChange={handleChange} name='emergencyContactName' placeholder='Nombre' />
-                    <InputText onChange={handleChange} name='emergencyContactResidentialPhone' placeholder='Telefono residencial' />
-                    <InputText onChange={handleChange} name='emergencyContactCellphone' placeholder='Celular' />
-                    <InputText onChange={handleChange} name='emergencyContactRelationship' placeholder='Parentesco' />
-                    <InputText onChange={handleChange} name='emergencyContactAddress' placeholder='Direccion' />
+                    <Input onChange={handleChange} name='emergencyContactName' placeholder='Nombre' aria-label='Nombre' />
+                    <Input onChange={handleChange} name='emergencyContactResidentialPhone' placeholder='Telefono residencial' aria-label='Telefono residencial' />
+                    <Input onChange={handleChange} name='emergencyContactCellphone' placeholder='Celular' aria-label='Celular' />
+                    <Input onChange={handleChange} name='emergencyContactRelationship' placeholder='Parentesco' aria-label='Parentesco' />
+                    <Input onChange={handleChange} name='emergencyContactAddress' placeholder='Direccion' aria-label='Direccion' />
                 </div>
             </div>
             <div className={styles.ARS}>
@@ -108,27 +112,28 @@ export default function MainForm() {
                 <div className='flex gap-4'>
                     <label>¿Tiene ARS?</label>
                     <div className='flex items-center gap-2'>
-                        <RadioButton className='border border-[#ccc] rounded-full' inputId="yes" name="hasAssurance" value={true} onChange={(e) => setFormData({ ...formData, hasAssurance: e.value })} checked={formData.hasAssurance} />
+                        <RadioButton className='border border-[#ccc] rounded-full' inputId="yes" name="hasAssurance" value={true} onChange={(e) => setFormData({ ...formData, hasAssurance: e.value })} checked={formData.hasAssurance} aria-label='Si' />
                         <label htmlFor="yes">Si</label>
                     </div>
                     <div className='flex items-center gap-2'>
-                        <RadioButton className='border border-[#ccc] rounded-full' inputId="no" name="hasAssurance" value={false} onChange={(e) => setFormData({ ...formData, hasAssurance: e.value })} checked={!formData.hasAssurance} />
+                        <RadioButton className='border border-[#ccc] rounded-full' inputId="no" name="hasAssurance" value={false} onChange={(e) => setFormData({ ...formData, hasAssurance: e.value })} checked={!formData.hasAssurance} aria-label='No' />
                         <label htmlFor="no">No</label>
                     </div>
                 </div>
                 <div className={styles.inputs} style={{ display: showARS ? 'grid' : 'none' }}>
-                    <InputText onChange={handleChange} name='ARSName' placeholder='Nombre' />
-                    <InputText onChange={handleChange} name='ARSCardholder' placeholder='Titular' />
-                    <InputText onChange={handleChange} name='ARSPrimaryInsured' placeholder='Asegurado principal' />
-                    <InputText onChange={handleChange} name='ARSPlan' placeholder='Plan' />
-                    <InputText onChange={handleChange} name='ARSContractNumber' placeholder='Numero de contrato' />
-                    <div className='flex flex-col'>
-                        <label>Parentesco con asegurado principal</label>
-                        <Dropdown className='border border-[#ccc]' value={formData.ARSPrimaryInsuredRelationship} options={primaryInsuredRelationships} onChange={(e) => setFormData({ ...formData, ARSPrimaryInsuredRelationship: e.value })} optionLabel='Parentesco del asegurado principal' />
-                    </div>
+                    <Input onChange={handleChange} name='ARSName' placeholder='Nombre' aria-label='Nombre' />
+                    <Input onChange={handleChange} name='ARSCardholder' placeholder='Titular' aria-label='Titular' />
+                    <Input onChange={handleChange} name='ARSPrimaryInsured' placeholder='Asegurado principal' aria-label='Asegurado principal' />
+                    <Input onChange={handleChange} name='ARSPlan' placeholder='Plan' aria-label='Plan' />
+                    <Input onChange={handleChange} name='ARSContractNumber' placeholder='Numero de contrato' aria-label='Numero de contrato' />
+                    <Select className='border border-[#ccc]' value={formData.ARSPrimaryInsuredRelationship} onChange={(e) => setFormData({ ...formData, ARSPrimaryInsuredRelationship: e.target.value as PrimaryInsuredRelationship })} placeholder='Parentesco' aria-label='Parentesco'>
+                        {primaryInsuredRelationships.map(p => (
+                            <SelectItem key={p} value={p}>{p}</SelectItem>
+                        ))}
+                    </Select>
                 </div>
             </div>
-            <Button label='Enviar' onClick={e => e.preventDefault()} className='bg-[#0070f3] text-white h-12' />
+            <Button onClick={e => e.preventDefault()} className='bg-[#0070f3] text-white h-12'>Enviar</Button>
         </form>
     )
 }
