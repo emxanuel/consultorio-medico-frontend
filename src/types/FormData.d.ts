@@ -24,7 +24,8 @@ export type FormData = {
     ARSPrimaryInsured?: string,
     ARSPlan?: string,
     ARSContractNumber?: string,
-    ARSPrimaryInsuredRelationship?: PrimaryInsuredRelationship | ""
+    ARSPrimaryInsuredRelationship?: PrimaryInsuredRelationship | "",
+    reason: string
 }
 
 export enum MaritalStatus {
@@ -41,6 +42,6 @@ export enum PrimaryInsuredRelationship {
 }
 
 export enum Gender {
-    masculine = "Masculino",
-    feminine = "Femenino"
+    male = "Masculino",
+    female = "Femenino"
 }

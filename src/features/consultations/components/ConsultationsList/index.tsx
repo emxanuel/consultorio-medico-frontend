@@ -11,7 +11,6 @@ interface Props {
 
 const ConsultationsList: React.FC<Props> = () => {
     const { consultationsQuery } = useConsultations();
-    console.log(consultationsQuery.data)
     return (
         <div className={styles.container}>
             {consultationsQuery.isLoading && <p className="p-[12px]">Cargando...</p>}

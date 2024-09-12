@@ -4,19 +4,23 @@ import { Button } from '@nextui-org/button'
 import { Input } from '@nextui-org/input'
 import { Select } from '@nextui-org/select'
 import { SelectItem } from '@nextui-org/select'
-import { DatePicker } from '@nextui-org/date-picker'
+import { DateInput } from '@nextui-org/date-input'
+import { Textarea } from '@nextui-org/react'
 // import { Input, Select, SelectItem } from '@nextui-org/react'
-import { ChangeEvent, useEffect, useState } from 'react'
+import { ChangeEvent, MouseEvent, useEffect, useState } from 'react'
 import { FormData } from '@/types'
 import { MaritalStatus, PrimaryInsuredRelationship, Gender } from '@/types'
 
 import styles from './styles.module.css'
 import { RadioButton } from 'primereact/radiobutton'
+import { createPatient } from '../../actions/createPatient'
 
 
 export default function MainForm() {
 
     const [showARS, setShowARS] = useState(false)
+    const [loading, setLoading] = useState(false)
+    const [message, setMessage] = useState('')
 
     const maritalStatuses = Object.values(MaritalStatus).filter((value) => typeof value === 'string')
     const primaryInsuredRelationships = Object.values(PrimaryInsuredRelationship).filter((value) => typeof value === 'string')
@@ -48,7 +52,8 @@ export default function MainForm() {
         ARSPrimaryInsured: "",
         ARSPlan: "",
         ARSContractNumber: "",
-        ARSPrimaryInsuredRelationship: PrimaryInsuredRelationship.spouse
+        ARSPrimaryInsuredRelationship: PrimaryInsuredRelationship.spouse,
+        reason: ""
     })
 
     useEffect(() => {
@@ -64,6 +69,26 @@ export default function MainForm() {
         setFormData({ ...formData, [name]: value })
     }
 
+    const handleClick = async (e: MouseEvent<HTMLButtonElement>) => {
+        e.preventDefault()
+        setLoading(true)
+        setMessage('')
+        try {
+            const response = await createPatient(formData)
+            console.log(response)
+            if (response) {
+                setMessage('Paciente creado correctamente')
+            }
+        }
+        catch (error) {
+            setMessage('Error al crear paciente')
+        }
+        finally {
+            setLoading(false)
+        }
+    }
+
+
     return (
         <form className={styles.container}>
             <div className={styles.personalInformation}>
@@ -71,20 +96,20 @@ export default function MainForm() {
                 <div className={styles.inputs}>
                     <Input onChange={handleChange} name='firstName' placeholder='Nombre del paciente' aria-label='Nombre del paciente' />
                     <Input onChange={handleChange} name='lastName' placeholder='Apellido' aria-label='Apellido' />
-                    <Input type='number' placeholder='Edad' max={120} aria-label='Edad' />
-                    <Select className='border border-[#ccc]' value={formData.gender} onChange={(e) => setFormData({ ...formData, gender: e.target.value as Gender })} placeholder='Genero' aria-label='Genero'>
+                    <Input onChange={handleChange} name="age" type='number' placeholder='Edad' max={120} aria-label='Edad' />
+                    <Select value={formData.gender} onChange={(e) => setFormData({ ...formData, gender: e.target.value as Gender })} placeholder='Genero' aria-label='Genero'>
                         {genders.map(g => (
                             <SelectItem key={g} value={g}>{g}</SelectItem>
                         ))}
                     </Select>
-                    <Select className='border border-[#ccc]' value={formData.maritalStatus} onChange={(e) => setFormData({ ...formData, maritalStatus: e.target.value as MaritalStatus })} placeholder='Estado civil' aria-label='Estado civil'>
+                    <Select value={formData.maritalStatus} onChange={(e) => setFormData({ ...formData, maritalStatus: e.target.value as MaritalStatus })} placeholder='Estado civil' aria-label='Estado civil'>
                         {maritalStatuses.map(m => (
                             <SelectItem key={m} value={m}>{m}</SelectItem>
                         ))}
                     </Select>
                     <div className='flex flex-col '>
                         <label>Fecha de nacimiento</label>
-                        <DatePicker onChange={(e) => setFormData({ ...formData, birthDate: e.toDate('en_us').toDateString() })} aria-label='Fecha de nacimiento' />
+                        <DateInput onChange={(e) => setFormData({ ...formData, birthDate: e.toString() })} aria-label='Fecha de nacimiento' />
                     </div>
                     <Input onChange={handleChange} name='birthPlace' placeholder='Lugar de nacimiento' aria-label='Lugar de nacimiento' />
                     <Input onChange={handleChange} name='nationality' placeholder='Nacionalidad' aria-label='Nacionalidad' />
@@ -126,14 +151,17 @@ export default function MainForm() {
                     <Input onChange={handleChange} name='ARSPrimaryInsured' placeholder='Asegurado principal' aria-label='Asegurado principal' />
                     <Input onChange={handleChange} name='ARSPlan' placeholder='Plan' aria-label='Plan' />
                     <Input onChange={handleChange} name='ARSContractNumber' placeholder='Numero de contrato' aria-label='Numero de contrato' />
-                    <Select className='border border-[#ccc]' value={formData.ARSPrimaryInsuredRelationship} onChange={(e) => setFormData({ ...formData, ARSPrimaryInsuredRelationship: e.target.value as PrimaryInsuredRelationship })} placeholder='Parentesco' aria-label='Parentesco'>
+                    <Select value={formData.ARSPrimaryInsuredRelationship} onChange={(e) => setFormData({ ...formData, ARSPrimaryInsuredRelationship: e.target.value as PrimaryInsuredRelationship })} placeholder='Parentesco' aria-label='Parentesco'>
                         {primaryInsuredRelationships.map(p => (
                             <SelectItem key={p} value={p}>{p}</SelectItem>
                         ))}
                     </Select>
                 </div>
             </div>
-            <Button onClick={e => e.preventDefault()} className='bg-[#0070f3] text-white h-12'>Enviar</Button>
+            <Textarea onChange={handleChange} name='reason' placeholder='Motivo de la consulta' aria-label='Motivo de la consulta' />
+            {loading && <p>Creando paciente...</p>}
+            {message && <p>{message}</p>}
+            <Button disabled={loading} onClick={handleClick} className='bg-[#0070f3] text-white h-12'>Enviar</Button>
         </form>
     )
 }
