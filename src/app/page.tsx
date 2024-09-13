@@ -1,11 +1,10 @@
-import MainForm from "@/features/home/components/MainForm";
-import styles from './styles.module.css'
+import Login from "@/features/login/componets/Login"
 
-export default function Home() {
-  return (
-    <div className={styles.container}>
-      <h1 className="text-2xl font-bold">Registro para consulta</h1>
-      <MainForm />
-    </div>
-  );
+export default function LoginPage() {
+    return (
+        <main className="flex flex-col gap-10 justify-center items-center pt-40">
+            <h1 className="text-2xl">Iniciar sesión</h1>
+            <Login />
+        </main>
+    )
 }

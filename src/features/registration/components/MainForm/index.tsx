@@ -30,7 +30,7 @@ export default function MainForm() {
         firstName: "",
         lastName: "",
         age: "",
-        gender: Gender.masculine,
+        gender: Gender.male,
         maritalStatus: MaritalStatus.single,
         birthDate: "",
         birthPlace: "",
@@ -81,7 +81,7 @@ export default function MainForm() {
             }
         }
         catch (error) {
-            setMessage('Error al crear paciente')
+            setMessage('Error al crear consulta')
         }
         finally {
             setLoading(false)
