@@ -1,4 +1,5 @@
 import api from "@/api";
+import dayjs from "dayjs";
 
 export const getConsultations = async (
   name: string | null,
@@ -7,7 +8,7 @@ export const getConsultations = async (
   statuses: string[]
 ) => {
   try {
-    let query = `?name=${name}&dateRange=${from},${to}&`;
+    let query = `?name=${name}&dateRange=${dayjs(from).toISOString()},${dayjs(to).toISOString()}&`;
     statuses.map((status) => {
       query = query + (`${status}=true&`);
     });
