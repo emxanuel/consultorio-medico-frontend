@@ -36,7 +36,7 @@ const Consultation: React.FC<Props> = ({ firstName, lastName, reason, visit_date
                 <h2 className='text-lg mb-4'><span>{firstName} {lastName}</span> <span>{dayjs(visit_date).toDate().toLocaleDateString()}</span></h2>
                 <p> - {reason}</p>
                 {status === 1 && <p className='text-green-400'>Diagnóstico: {diagnosis}</p>}
-                {status === 2 && <p className='text-red-600'>Motivo: </p>}
+                {status === 2 && <p className='text-red-600'>Motivo: {diagnosis}</p>}
             </div>
             <div className={styles.buttonsContainer}>
                 {status === 0 && (

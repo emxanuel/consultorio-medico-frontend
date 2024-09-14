@@ -8,11 +8,13 @@ export const getConsultations = async (
   statuses: string[]
 ) => {
   try {
-    let query = `?name=${name}&dateRange=${dayjs(from).toISOString()},${dayjs(to).toISOString()}&`;
+    let query = `?name=${name}&`;
+    if (from && to) {
+      query = query + `dateRange=${dayjs(from).format("YYYY-MM-DD")},${dayjs(to).format("YYYY-MM-DD")}&`;
+    }
     statuses.map((status) => {
       query = query + (`${status}=true&`);
     });
-    console.log(query);
 
     const response = await api.get(`/visits${query}`);
     return response.data;
