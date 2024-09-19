@@ -7,7 +7,7 @@ import Providers from "./providers";
 const poppins = Poppins({ subsets: ["latin"], weight: "400" });
 
 import "./globals.css";
-import Navbar from "@/features/general/Navbar";
+import Navbar from "@/features/general/components/Navbar";
 import { NextUIProvider } from "@nextui-org/react";
 
 export const metadata: Metadata = {

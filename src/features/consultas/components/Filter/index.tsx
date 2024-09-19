@@ -23,13 +23,13 @@ export default function Filter({ setName, setFrom, setTo, setStatuses, statuses 
     }
 
     return (
-        <div className="w-[40rem] flex flex-col gap-4 pb-6">
+        <div className="w-[90%] max-w-[40rem] flex flex-col gap-4 pb-6">
             <Input onChange={e => setName(e.target.value)} fullWidth variant="bordered" label='Buscar por nombre' />
-            <div className="flex gap-2">
+            <div className="flex flex-col md:flex-row gap-2">
                 <DatePicker showMonthAndYearPickers onChange={e => setFrom(e.toString())} label='Desde: ' />
                 <DatePicker showMonthAndYearPickers onChange={e => setTo(e.toString())} label='Hasta: ' />
             </div>
-            <div className="flex justify-between">
+            <div className="flex flex-col md:flex-row justify-between">
                 <Checkbox defaultSelected onChange={e => handleStatusChange(e.target.name)} name="pendient">Pendientes</Checkbox>
                 <Checkbox onChange={e => handleStatusChange(e.target.name)} name="processed">Procesadas</Checkbox>
                 <Checkbox onChange={e => handleStatusChange(e.target.name)} name="canceled">Canceladas</Checkbox>

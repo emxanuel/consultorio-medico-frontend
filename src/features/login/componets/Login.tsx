@@ -19,10 +19,10 @@ export default function Login() {
     }
 
     return (
-        <form className="w-[40rem] flex flex-col items-center gap-4">
-            <Input className="w-80" onChange={e => setUser(e.target.value)} placeholder="Usuario" />
-            <Input className="w-80" onChange={e => setPassword(e.target.value)} type="password" placeholder="Contraseña" />
-            <Button className="w-80" color="primary" variant="bordered" onClick={handleClick}>Entrar</Button>
+        <form className="w-[90%] max-w-[40rem] flex flex-col items-center gap-4">
+            <Input className="max-w-80" fullWidth onChange={e => setUser(e.target.value)} placeholder="Usuario" />
+            <Input className="max-w-80" fullWidth onChange={e => setPassword(e.target.value)} type="password" placeholder="Contraseña" />
+            <Button className="max-w-80" fullWidth color="primary" variant="bordered" onClick={handleClick}>Entrar</Button>
         </form>
     )
 }

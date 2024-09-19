@@ -1,4 +1,4 @@
-import { Navbar as Nav, NavbarBrand, NavbarItem } from "@nextui-org/react";
+import { Navbar as Nav, NavbarBrand, NavbarItem, NavbarMenu, NavbarMenuItem, NavbarMenuToggle } from "@nextui-org/react";
 import Link from "next/link";
 import Image from "next/image";
 import { logo } from "@/assets";
@@ -29,11 +29,21 @@ export default function Navbar() {
             </NavbarBrand>
             {
                 links.map((link, index) => (
-                    <NavbarItem key={index}>
+                    <NavbarItem key={index} className="hidden md:block">
                         <Link href={link.url}>{link.name}</Link>
                     </NavbarItem>
                 ))
             }
+            <NavbarMenuToggle className="md:hidden" />
+            <NavbarMenu>
+                {
+                    links.map((link, index) => (
+                        <NavbarMenuItem key={index}>
+                            <Link href={link.url}>{link.name}</Link>
+                        </NavbarMenuItem>
+                    ))
+                }
+            </NavbarMenu>
         </Nav>
     )
 }
