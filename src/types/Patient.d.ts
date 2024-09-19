@@ -20,5 +20,5 @@ export type Patient = {
   cellphone: string;
   visit?: Visit[];
   insurance?: Insurance[];
-  emergency_contact: EmergencyContact[];
+  emergency_contact?: EmergencyContact[];
 };
