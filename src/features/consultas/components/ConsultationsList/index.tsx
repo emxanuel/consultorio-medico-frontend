@@ -27,7 +27,7 @@ const ConsultationsList: React.FC<Props> = () => {
         <div className={styles.container}>
             <Filter setFrom={setFrom} setName={setName} setTo={setTo} statuses={statuses} setStatuses={setStatuses} />
             {consultationsQuery.isLoading && <p className="p-[12px]">Cargando...</p>}
-            {consultationsQuery.data.length === 0 && <p className="p-[12px]">No hay consultas</p>}
+            {consultationsQuery.data?.length === 0 && <p className="p-[12px]">No hay consultas</p>}
             {consultationsQuery.data?.map((consultation: any, index: number) => (
                 <Consultation
                     key={index}
