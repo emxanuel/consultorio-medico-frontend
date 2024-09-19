@@ -4,6 +4,9 @@
     width: 40rem;
     padding: 6px 12px;
     width: 100%;
+    transition: ease-in 0.2s;
+    border-radius: 5px;
+    user-select: none;
 }
 .infoContainer h2 {
     display: flex;
@@ -16,4 +19,10 @@
     display: flex;
     gap: 10px;
     justify-content: flex-end;
+}
+
+.container:hover {
+    background-color: #f5f5f5;
+    box-shadow: 6px 10px 20px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
 }

@@ -37,6 +37,8 @@ const ConsultationsList: React.FC<Props> = () => {
                     id={consultation.id}
                     status={consultation.status}
                     diagnosis={consultation.diagnosis}
+                    refetch={consultationsQuery.refetch}
+                    patient_id={consultation.person.id}
                 />
             ))}
         </div>

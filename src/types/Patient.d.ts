@@ -1,3 +1,7 @@
+import { EmergencyContact } from "./EmergencyContact";
+import { Visit } from "./Visit";
+import { Insurance } from "./Insurance"
+
 export type Patient = {
   id?: number;
   first_name: string;
@@ -14,4 +18,7 @@ export type Patient = {
   address: string;
   residential_phone?: string;
   cellphone: string;
+  visit?: Visit[];
+  insurance?: Insurance[];
+  emergency_contact: EmergencyContact[];
 };

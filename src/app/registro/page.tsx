@@ -1,4 +1,4 @@
-import MainForm from "@/features/registration/components/MainForm";
+import MainForm from "@/features/registro/components/MainForm";
 import styles from './styles.module.css'
 import { Metadata } from "next";
 

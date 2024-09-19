@@ -1,4 +1,4 @@
-import ConsultationsList from "@/features/consultations/components/ConsultationsList";
+import ConsultationsList from "@/features/consultas/components/ConsultationsList";
 import { Metadata } from "next";
 
 import styles from './styles.module.css'

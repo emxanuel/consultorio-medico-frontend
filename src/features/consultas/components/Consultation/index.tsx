@@ -5,6 +5,8 @@ import styles from './styles.module.css'
 import { Button } from '@nextui-org/button';
 import { useState } from 'react';
 import ModalAnswer from '../ModalAnswer';
+import { usePatient } from '@/features/general/hooks/usePatient';
+import { FormData, PrimaryInsuredRelationship } from '@/types';
 
 interface Props {
     firstName: string;
@@ -13,12 +15,46 @@ interface Props {
     visit_date: string;
     id: number;
     status: number,
-    diagnosis: string
+    diagnosis: string,
+    refetch: () => void,
+    patient_id: number
 }
 
-const Consultation: React.FC<Props> = ({ firstName, lastName, reason, visit_date, id, status, diagnosis }) => {
+const Consultation: React.FC<Props> = ({ firstName, lastName, reason, visit_date, id, status, diagnosis, refetch, patient_id }) => {
     const [showModal, setShowModal] = useState(false)
     const [action, setAction] = useState<'processed' | 'canceled'>('processed')
+    const { patientQuery } = usePatient(patient_id)
+    const requestData = patientQuery.data
+    const data: FormData = {
+        firstName: requestData?.first_name ?? '',
+        lastName: requestData?.last_name ?? '',
+        age: requestData?.age.toString() ??'0',
+        gender: requestData?.gender,
+        maritalStatus: requestData?.marital_status,
+        birthDate: requestData?.birth_date  ?? '',
+        birthPlace: requestData?.birth_place  ?? '',
+        nationality: requestData?.nationality  ?? '',
+        religion: requestData?.religion ?? '',
+        ocupation: requestData?.occupation ?? '',
+        documentId: requestData?.document_id  ?? '',
+        address: requestData?.address  ?? '',
+        residentialPhone: requestData?.residential_phone ?? ''  ?? '',
+        cellphone: requestData?.cellphone  ?? '',
+        emergencyContactName: requestData?.emergency_contact?.[0]?.name  ?? '',
+        emergencyContactResidentialPhone: requestData?.emergency_contact?.[0]?.residential_phone  ?? '',
+        emergencyContactCellphone: requestData?.emergency_contact?.[0]?.cellphone  ?? '',
+        emergencyContactRelationship: requestData?.emergency_contact?.[0]?.relationship  ?? '',
+        emergencyContactAddress: requestData?.emergency_contact?.[0]?.address  ?? '',
+        hasAssurance: requestData?.insurance?.[0] !== undefined,
+        ARSName: requestData?.insurance?.[0].ars_name  ?? '',
+        ARSCardholder: requestData?.insurance?.[0].ars_cardholder  ?? '',
+        ARSPrimaryInsured: requestData?.insurance?.[0].ars_primary_insured  ?? '',
+        ARSPlan: requestData?.insurance?.[0].ars_plan  ?? '',
+        ARSContractNumber: requestData?.insurance?.[0].ars_contract_number  ?? '',
+        ARSPrimaryInsuredRelationship: requestData?.insurance?.[0].ars_primary_insured_relationship as PrimaryInsuredRelationship  ?? '',
+        reason: reason
+
+    }
 
     const handleProcessClick = () => {
         setAction('processed')
@@ -31,7 +67,7 @@ const Consultation: React.FC<Props> = ({ firstName, lastName, reason, visit_date
     }
 
     return (
-        <div className={styles.container}>
+        <div className={styles.container} onClick={() => status !== 0 && setShowModal(true)}>
             <div className={styles.infoContainer}>
                 <h2 className='text-lg mb-4'><span>{firstName} {lastName}</span> <span>{dayjs(visit_date).toDate().toLocaleDateString()}</span></h2>
                 <p> - {reason}</p>
@@ -52,7 +88,7 @@ const Consultation: React.FC<Props> = ({ firstName, lastName, reason, visit_date
                     </>
                 )}
             </div>
-            {showModal && <ModalAnswer action={action} visitId={id} setShowModal={setShowModal} />}
+            {showModal && <ModalAnswer propsDiagnosis={diagnosis} data={data} refetch={refetch} readonly={status !== 0} action={action} visitId={id} setShowModal={setShowModal} />}
         </div>
     )
 }
