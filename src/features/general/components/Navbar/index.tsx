@@ -1,7 +1,10 @@
+'use client'
+
 import { Navbar as Nav, NavbarBrand, NavbarItem, NavbarMenu, NavbarMenuItem, NavbarMenuToggle } from "@nextui-org/react";
 import Link from "next/link";
 import Image from "next/image";
 import { logo } from "@/assets";
+import { useReducer } from "react";
 
 const links = [
     {
@@ -19,9 +22,11 @@ const links = [
 ]
 
 export default function Navbar() {
+    const [isMenuOpen, setIsMenuOpen] = useReducer((current) => !current, false)
+
 
     return (
-        <Nav className="w-screen bg-white bg-opacity-60">
+        <Nav className="w-screen bg-white bg-opacity-60" isMenuOpen={isMenuOpen} onMenuOpenChange={() => setIsMenuOpen()}>
             <NavbarBrand>
                 <Link href="/">
                     <Image src={logo.src} alt="Logo" width={200} height={100} />
@@ -39,7 +44,7 @@ export default function Navbar() {
                 {
                     links.map((link, index) => (
                         <NavbarMenuItem key={index}>
-                            <Link href={link.url}>{link.name}</Link>
+                            <Link onClick={() => setIsMenuOpen()} href={link.url}>{link.name}</Link>
                         </NavbarMenuItem>
                     ))
                 }
