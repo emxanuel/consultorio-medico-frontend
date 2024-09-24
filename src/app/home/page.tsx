@@ -10,7 +10,7 @@ export default function Home() {
     return (
         <div>
             <div className="relative">
-                <Image className="w-full h-[100vh] md:h-full object-[-29rem] object-cover md:object-none md:object-[0px]" src={homeImage.src} alt="home" width={1280} height={719} />
+                <Image className="w-full h-[100vh] md:h-full object-[-29rem] object-cover md:object-[0px]" src={homeImage.src} alt="home" width={1280} height={719} />
                 <div className="absolute w-full h-full bg-black z-10 top-0 opacity-50 md:opacity-35" />
                 <div className="absolute w-full h-full z-20 top-0 flex items-center justify-center flex-col">
                     <h1 className="text-white text-2xl md:text-4xl font-bold">Bienvenido a</h1>
