@@ -40,7 +40,9 @@ export default function Navbar() {
                 ))
             }
             <NavbarMenuToggle className="md:hidden" />
-            <NavbarMenu>
+            <NavbarMenu style={{
+                backgroundColor: 'rgba(255, 255, 255, 0.5)',
+            }}>
                 {
                     links.map((link, index) => (
                         <NavbarMenuItem key={index}>

@@ -106,10 +106,10 @@ export default function MainForm({ data, readonly }: Props) {
             <div className={styles.personalInformation}>
                 <h1 className='text-xl'>Información del paciente</h1>
                 <div className={styles.inputs}>
-                    <Input onChange={handleChange} name='firstName' label='Nombre del paciente' value={formData.firstName} isDisabled={readonly} />
-                    <Input onChange={handleChange} name='lastName' label='Apellido' value={formData.lastName} isDisabled={readonly} />
-                    <Input onChange={handleChange} name="age" type='number' max={120} label='Edad' value={formData.age} isDisabled={readonly} />
-                    <Select value={formData.gender} onChange={(e) => setFormData({ ...formData, gender: e.target.value as Gender })} label='Genero' isDisabled={readonly}>
+                    <Input onChange={handleChange} name='firstName' label='Nombre del paciente' value={formData.firstName} isDisabled={readonly} isRequired />
+                    <Input onChange={handleChange} name='lastName' label='Apellido' value={formData.lastName} isDisabled={readonly} isRequired />
+                    <Input onChange={handleChange} name="age" type='number' max={120} label='Edad' value={formData.age} isDisabled={readonly} isRequired />
+                    <Select value={formData.gender} onChange={(e) => setFormData({ ...formData, gender: e.target.value as Gender })} label='Genero' isDisabled={readonly} isRequired>
                         {genders.map(g => (
                             <SelectItem key={g} value={g}>{g}</SelectItem>
                         ))}
@@ -120,28 +120,28 @@ export default function MainForm({ data, readonly }: Props) {
                         ))}
                     </Select>
                     {readonly ? (
-                        <Input onChange={handleChange} name='birthDate' label='Fecha de nacimiento' value={dayjs(formData.birthDate).toDate().toLocaleDateString()} isDisabled={readonly} />
+                        <Input onChange={handleChange} name='birthDate' label='Fecha de nacimiento' value={dayjs(formData.birthDate).toDate().toLocaleDateString()} isDisabled={readonly} isRequired />
                     ) : (
-                        <DatePicker minValue={today(getLocalTimeZone()).subtract({years: 300})} showMonthAndYearPickers onChange={(e) => setFormData({ ...formData, birthDate: e.toString() })} label='Fecha de nacimiento' />
+                        <DatePicker minValue={today(getLocalTimeZone()).subtract({years: 300})} showMonthAndYearPickers onChange={(e) => setFormData({ ...formData, birthDate: e.toString() })} label='Fecha de nacimiento' isRequired />
                     )}
                     <Input onChange={handleChange} name='birthPlace' label='Lugar de nacimiento' value={formData.birthPlace} isDisabled={readonly} />
                     <Input onChange={handleChange} name='nationality' label='Nacionalidad' value={formData.nationality} isDisabled={readonly} />
                     <Input onChange={handleChange} name='religion' label='Religion' value={formData.religion} isDisabled={readonly} />
-                    <Input onChange={handleChange} name='ocupation' label='Ocupacion' value={formData.ocupation} isDisabled={readonly} />
-                    <Input onChange={handleChange} name='documentId' label='Cedula' value={formData.documentId} isDisabled={readonly} />
+                    <Input onChange={handleChange} name='ocupation' label='Ocupacion' value={formData.ocupation} isDisabled={readonly} isRequired />
+                    <Input onChange={handleChange} name='documentId' label='Cedula' value={formData.documentId} isDisabled={readonly} isRequired />
                     <Input onChange={handleChange} name='address' label='Direccion' value={formData.address} isDisabled={readonly} />
                     <Input onChange={handleChange} name='residentialPhone' label='Telefono residencial' value={formData.residentialPhone} isDisabled={readonly} />
-                    <Input onChange={handleChange} name='cellphone' label='Celular' value={formData.cellphone} isDisabled={readonly} />
+                    <Input onChange={handleChange} name='cellphone' label='Celular' value={formData.cellphone} isDisabled={readonly} isRequired />
                 </div>
 
             </div>
             <div className={styles.emergencyContact}>
                 <h1 className='text-xl'>Contacto de emergencia</h1>
                 <div className={styles.inputs}>
-                    <Input onChange={handleChange} name='emergencyContactName' label='Nombre' value={formData.emergencyContactName} isDisabled={readonly} />
+                    <Input isRequired onChange={handleChange} name='emergencyContactName' label='Nombre' value={formData.emergencyContactName} isDisabled={readonly} />
                     <Input onChange={handleChange} name='emergencyContactResidentialPhone' label='Telefono residencial' value={formData.emergencyContactResidentialPhone} isDisabled={readonly} />
-                    <Input onChange={handleChange} name='emergencyContactCellphone' label='Celular' value={formData.emergencyContactCellphone} isDisabled={readonly} />
-                    <Input onChange={handleChange} name='emergencyContactRelationship' label='Parentesco' value={formData.emergencyContactRelationship} isDisabled={readonly} />
+                    <Input isRequired onChange={handleChange} name='emergencyContactCellphone' label='Celular' value={formData.emergencyContactCellphone} isDisabled={readonly} />
+                    <Input isRequired onChange={handleChange} name='emergencyContactRelationship' label='Parentesco' value={formData.emergencyContactRelationship} isDisabled={readonly} />
                     <Input onChange={handleChange} name='emergencyContactAddress' label='Direccion' value={formData.emergencyContactAddress} isDisabled={readonly} />
                 </div>
             </div>
@@ -169,7 +169,7 @@ export default function MainForm({ data, readonly }: Props) {
                     </Select>
                 </div>
             </div>
-            <Textarea isDisabled={readonly} value={formData.reason} onChange={handleChange} name='reason' label='Motivo de la consulta' />
+            <Textarea isDisabled={readonly} value={formData.reason} onChange={handleChange} name='reason' label='Motivo de la consulta' isRequired />
             {loading && <p>Creando paciente...</p>}
             {message && <p>{message}</p>}
             {readonly && <p>Este formulario es solo de lectura</p>}
