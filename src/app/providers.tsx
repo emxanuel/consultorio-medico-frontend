@@ -2,6 +2,9 @@
 
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { QueryClient, QueryClientProvider, isServer } from "@tanstack/react-query";
+import { UserProvider } from "@auth0/nextjs-auth0/client";
+import { NextUIProvider } from "@nextui-org/react";
+import { PayPalScriptProvider } from "@paypal/react-paypal-js";
 
 let browserQueyClient: QueryClient | undefined = undefined;
 
@@ -27,6 +30,12 @@ function getQueryClient() {
     return browserQueyClient;
 }
 
+const paypalInitialOptions = {
+    clientId: process.env.NEXT_PUBLIC_PAYPAL_CLIENT_ID || '',
+    currency: "USD",
+    intent: "capture"
+}
+
 
 interface Props {
     children: React.ReactNode;
@@ -36,7 +45,13 @@ const Providers: React.FC<Props> = ({ children }) => {
     const queryClient = getQueryClient()
     return (
         <QueryClientProvider client={queryClient}>
-            {children}
+            <NextUIProvider>
+                <UserProvider>
+                    <PayPalScriptProvider options={paypalInitialOptions}>
+                        {children}
+                    </PayPalScriptProvider>
+                </UserProvider>
+            </NextUIProvider>
             <ReactQueryDevtools />
         </QueryClientProvider>
     )

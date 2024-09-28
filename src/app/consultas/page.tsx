@@ -7,7 +7,7 @@ export const metadata: Metadata = {
     title: "Consultas"
 }
 
-export default function ConsultasPage() {
+export default async function ConsultasPage() {
     return (
         <div className={styles.container}>
             <h1>Consultas</h1>

@@ -8,7 +8,6 @@ const poppins = Poppins({ subsets: ["latin"], weight: "400" });
 
 import "./globals.css";
 import Navbar from "@/features/general/components/Navbar";
-import { NextUIProvider } from "@nextui-org/react";
 
 export const metadata: Metadata = {
   title: "Consultorio Medico",
@@ -25,12 +24,10 @@ export default function RootLayout({
       <body
         className={`${poppins.className} flex flex-col`}
       >
-        <NextUIProvider>
           <Providers>
             <Navbar />
             {children}
           </Providers>
-        </NextUIProvider>
       </body>
     </html>
   );

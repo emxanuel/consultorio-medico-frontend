@@ -9,8 +9,10 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@auth0/nextjs-auth0": "^3.5.0",
     "@internationalized/date": "^3.5.5",
     "@nextui-org/react": "^2.4.6",
+    "@paypal/react-paypal-js": "^8.7.0",
     "@tanstack/react-query": "^5.55.4",
     "@tanstack/react-query-devtools": "^5.55.4",
     "axios": "^1.7.7",

@@ -8,7 +8,7 @@ export default function Login() {
 
     const handleClick = (e: MouseEvent<HTMLButtonElement>) => {
         e.preventDefault()
-        router.push('http://localhost/login')
+        router.push('/api/auth/login')
     }
 
     return (
