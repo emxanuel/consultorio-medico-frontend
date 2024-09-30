@@ -5,10 +5,11 @@ export const getConsultations = async (
   name: string | null,
   from: string | null,
   to: string | null,
-  statuses: string[]
+  statuses: string[],
+  accountKey: string
 ) => {
   try {
-    let query = `?name=${name}&`;
+    let query = `?accountKey=${accountKey}&name=${name}&`;
     if (from && to) {
       query = query + `dateRange=${dayjs(from).format("YYYY-MM-DD")},${dayjs(to).format("YYYY-MM-DD")}&`;
     }

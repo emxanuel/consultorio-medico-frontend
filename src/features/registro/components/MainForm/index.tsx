@@ -16,6 +16,8 @@ import styles from './styles.module.css'
 import { RadioButton } from 'primereact/radiobutton'
 import { createPatient } from '../../actions/createPatient'
 import dayjs from 'dayjs'
+import { userStore } from '@/features/general/store/userStore'
+import { useMutation } from '@tanstack/react-query'
 
 interface Props {
     data?: FormData,
@@ -25,8 +27,12 @@ interface Props {
 export default function MainForm({ data, readonly }: Props) {
 
     const [showARS, setShowARS] = useState(false)
-    const [loading, setLoading] = useState(false)
     const [message, setMessage] = useState('')
+    const { user } = userStore()
+    const actualAccount = user.actualAccount
+    const createClientMutation = useMutation({
+        mutationFn: () => createPatient(formData, actualAccount.account_key)
+    })
 
     const maritalStatuses = Object.values(MaritalStatus).filter((value) => typeof value === 'string')
     const primaryInsuredRelationships = Object.values(PrimaryInsuredRelationship).filter((value) => typeof value === 'string')
@@ -83,22 +89,18 @@ export default function MainForm({ data, readonly }: Props) {
 
     const handleClick = async (e: MouseEvent<HTMLButtonElement>) => {
         e.preventDefault()
-        setLoading(true)
         setMessage('')
-        try {
-            const response = await createPatient(formData)
-            console.log(response)
-            if (response) {
-                setMessage('Paciente creado correctamente')
-            }
+        createClientMutation.mutate()
+    }
+
+    useEffect(() => {
+        if (createClientMutation.isSuccess) {
+            setMessage('Paciente creado correctamente')
         }
-        catch (error) {
+        if (createClientMutation.isError) {
             setMessage('Error al crear consulta')
         }
-        finally {
-            setLoading(false)
-        }
-    }
+    }, [createClientMutation.isError, createClientMutation.isSuccess])
 
 
     return (
@@ -170,10 +172,10 @@ export default function MainForm({ data, readonly }: Props) {
                 </div>
             </div>
             <Textarea isDisabled={readonly} value={formData.reason} onChange={handleChange} name='reason' label='Motivo de la consulta' isRequired />
-            {loading && <p>Creando paciente...</p>}
+            {createClientMutation.isPending && <p>Creando paciente...</p>}
             {message && <p>{message}</p>}
             {readonly && <p>Este formulario es solo de lectura</p>}
-            {readonly ?? <Button isDisabled={loading} onClick={handleClick} className='bg-[#0070f3] text-white h-12'>Enviar</Button>}
+            {readonly ?? <Button isDisabled={createClientMutation.isPending} onClick={handleClick} className='bg-[#0070f3] text-white h-12'>Enviar</Button>}
             
         </form>
     )

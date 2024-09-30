@@ -7,6 +7,7 @@ import Consultation from "../Consultation";
 import Filter from "../Filter";
 
 import styles from './styles.module.css'
+import { userStore } from "@/features/general/store/userStore";
 
 interface Props {
 }
@@ -17,7 +18,9 @@ const ConsultationsList: React.FC<Props> = () => {
     const [from, setFrom] = useState('')
     const [to, setTo] = useState('')
     const [statuses, setStatuses] = useState<string[]>(['pendient'])
-    const { consultationsQuery } = useConsultations(name, from, to, statuses);
+    const { user } = userStore()
+    const actualAccount = user.actualAccount
+    const { consultationsQuery } = useConsultations(name, from, to, statuses, actualAccount.account_key as string);
 
     useEffect(() => {
         consultationsQuery.refetch()

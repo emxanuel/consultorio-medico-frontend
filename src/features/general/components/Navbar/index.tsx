@@ -2,8 +2,8 @@
 
 import { Navbar as Nav, NavbarBrand, NavbarItem, NavbarMenu, NavbarMenuItem, NavbarMenuToggle } from "@nextui-org/react";
 import Link from "next/link";
-import Image from "next/image";
-import { logo } from "@/assets";
+// import Image from "next/image";
+// import { logo } from "@/assets";
 import { useEffect, useReducer } from "react";
 import { userStore } from "../../store/userStore";
 import { useGetAccounts } from "../../hooks/useGetAccounts";
@@ -16,31 +16,25 @@ import { useParams } from "next/navigation";
 export default function Navbar() {
     const params = useParams()
     const [isMenuOpen, setIsMenuOpen] = useReducer((current) => !current, false)
-    const {setUser, user: storeUser} = userStore()
+    const { setUser, user: storeUser } = userStore()
     const session = useUser()
     const user = session.user
-    const {accountsQuery} = useGetAccounts(user?.email as string)
-    const {accountQuery} = useGetAccount(params.enterprise as string)
+    const { accountsQuery } = useGetAccounts(user?.email as string)
+    const { accountQuery } = useGetAccount(params.enterprise as string)
     const accounts = accountsQuery.data
     const actualAccount = accountQuery.data
 
-    console.log(actualAccount)
-
     useEffect(() => {
-        if (accounts && accounts.length === 1){
+        if (accounts && accounts.length === 1) {
             setUser({
                 email: user?.email as string,
                 accounts,
                 actualAccount
             })
         }
-    }, [accountsQuery.isLoading])
+    }, [accounts, accountsQuery.isLoading, actualAccount, setUser, user?.email])
 
     const links = [
-        {
-            name: "Home",
-            url: `/${storeUser.actualAccount?.account_key}`
-        },
         {
             name: "Registro",
             url: `/${storeUser.actualAccount?.account_key}/registro`
@@ -49,6 +43,10 @@ export default function Navbar() {
             name: "Consultas",
             url: `/${storeUser.actualAccount?.account_key}/consultas`
         },
+        {
+            name: "Logout",
+            url: "/api/auth/logout"
+        }
     ]
 
 
@@ -56,31 +54,35 @@ export default function Navbar() {
     return (
         <Nav className="w-screen bg-white bg-opacity-60" isMenuOpen={isMenuOpen} onMenuOpenChange={() => setIsMenuOpen()}>
             <NavbarBrand>
-                <Link href="/">
+                <Link href={user? '/': ''}>
                     {/* <Image src={logo.src} alt="Logo" width={200} height={100} />
                      */}
-                     <h1>{storeUser.actualAccount?.name}</h1>
+                    <h1>{storeUser.actualAccount?.name}</h1>
                 </Link>
             </NavbarBrand>
             {
-                links.map((link, index) => (
+                user && links.map((link, index) => (
                     <NavbarItem key={index} className="hidden md:block">
                         <Link href={link.url}>{link.name}</Link>
                     </NavbarItem>
                 ))
             }
-            <NavbarMenuToggle className="md:hidden" />
-            <NavbarMenu style={{
-                backgroundColor: 'rgba(255, 255, 255, 0.5)',
-            }}>
-                {
-                    links.map((link, index) => (
-                        <NavbarMenuItem key={index}>
-                            <Link onClick={() => setIsMenuOpen()} href={link.url}>{link.name}</Link>
-                        </NavbarMenuItem>
-                    ))
-                }
-            </NavbarMenu>
+            {user && (
+                <>
+                    <NavbarMenuToggle className="md:hidden" />
+                    <NavbarMenu style={{
+                        backgroundColor: 'rgba(255, 255, 255, 0.5)',
+                    }}>
+                        {
+                            links.map((link, index) => (
+                                <NavbarMenuItem key={index}>
+                                    <Link onClick={() => setIsMenuOpen()} href={link.url}>{link.name}</Link>
+                                </NavbarMenuItem>
+                            ))
+                        }
+                    </NavbarMenu>
+                </>
+            )}
         </Nav>
     )
 }

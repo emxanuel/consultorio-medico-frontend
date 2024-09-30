@@ -3,7 +3,19 @@ import { redirect } from "next/navigation"
 import { getAccounts } from "@/features/general/actions/getAccounts"
 import { verifyUser } from "@/features/general/actions/verifyUser"
 
-export const verifyAndRedirect = async () => {
+export const verifyAndRedirect = async (accountKey?: string) => {
+
+    if (accountKey){
+        const session = await getSession()
+        const user = session?.user
+        const verified = await verifyUser(user?.email)
+
+        if (!verified){
+            redirect('/')
+        }
+        return
+    }
+
     const session = await getSession()
     const user = session?.user
     const verified = await verifyUser(user?.email)
