@@ -2,19 +2,23 @@
 
 import { Input } from "@nextui-org/input"
 import { Button } from "@nextui-org/button"
-import { useState } from "react"
+import { useState, MouseEvent } from "react"
 import { useUser } from "@auth0/nextjs-auth0/client"
-import { useVerifyUser } from "../../hooks/useVerifyUser"
+import { useMutation } from "@tanstack/react-query"
+import { createUser } from "../../actions/createUser"
 
 export default function RegistrationForm() {
     const [accountName, setAccountName] = useState('')
     const userData = useUser()
-    const { verifyUserQuery } = useVerifyUser(userData.isLoading ? '' : userData.user?.email ?? '')
-    console.log(verifyUserQuery.data)
+    const user = userData.user
+    const signUpMutation = useMutation({
+        mutationFn: () => createUser(user?.email as string, user?.given_name as string, user?.family_name as string, accountName),
+    })
 
-
-    if (userData.isLoading) return <p>Cargando...</p>
-    if (verifyUserQuery.data === true) return <p>Ya tienes una cuenta</p>
+    const handleClick = async (e: MouseEvent<HTMLButtonElement>) => {
+        e.preventDefault()
+        signUpMutation.mutate()
+    }
 
     return (
         <form className="w-[90%] max-w-[40rem] flex flex-col items-center gap-4">
@@ -23,7 +27,7 @@ export default function RegistrationForm() {
                 value={accountName}
                 onChange={(e) => setAccountName(e.target.value)}
             />
-            <Button className="max-w-80" fullWidth color="primary" variant="bordered">Crear cuenta</Button>
+            <Button className="max-w-80" disabled={signUpMutation.isPending} onClick={handleClick} fullWidth color="primary" variant="bordered">Crear cuenta</Button>
         </form>
     )
 }

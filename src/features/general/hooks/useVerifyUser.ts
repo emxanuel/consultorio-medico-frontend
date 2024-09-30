@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import { verifyUser } from "../actions/verifyUser";
+import { verifyUser } from "../../general/actions/verifyUser";
 
 export const useVerifyUser = (email: string) => {
     const verifyUserQuery = useQuery({

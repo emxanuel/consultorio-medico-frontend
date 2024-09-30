@@ -7,7 +7,6 @@ import Providers from "./providers";
 const poppins = Poppins({ subsets: ["latin"], weight: "400" });
 
 import "./globals.css";
-import Navbar from "@/features/general/components/Navbar";
 
 export const metadata: Metadata = {
   title: "Consultorio Medico",
@@ -25,7 +24,6 @@ export default function RootLayout({
         className={`${poppins.className} flex flex-col`}
       >
           <Providers>
-            <Navbar />
             {children}
           </Providers>
       </body>
