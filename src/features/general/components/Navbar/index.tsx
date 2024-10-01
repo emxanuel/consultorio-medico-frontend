@@ -42,10 +42,6 @@ export default function Navbar() {
         {
             name: "Consultas",
             url: `/${storeUser.actualAccount?.account_key}/consultas`
-        },
-        {
-            name: "Logout",
-            url: "/api/auth/logout"
         }
     ]
 
@@ -54,18 +50,23 @@ export default function Navbar() {
     return (
         <Nav className="w-screen bg-white bg-opacity-60" isMenuOpen={isMenuOpen} onMenuOpenChange={() => setIsMenuOpen()}>
             <NavbarBrand>
-                <Link href={user? '/': ''}>
+                <Link href={user ? '/' : ''}>
                     {/* <Image src={logo.src} alt="Logo" width={200} height={100} />
                      */}
                     <h1>{storeUser.actualAccount?.name}</h1>
                 </Link>
             </NavbarBrand>
             {
-                user && links.map((link, index) => (
-                    <NavbarItem key={index} className="hidden md:block">
-                        <Link href={link.url}>{link.name}</Link>
+                <>
+                    {user && links.map((link, index) => (
+                        <NavbarItem key={index} className="hidden md:block">
+                            <Link href={link.url}>{link.name}</Link>
+                        </NavbarItem>
+                    ))}
+                    <NavbarItem className="hidden md:block">
+                        <button onClick={() => window.location.href='/api/auth/logout'}>Logout</button>
                     </NavbarItem>
-                ))
+                </>
             }
             {user && (
                 <>
@@ -80,6 +81,9 @@ export default function Navbar() {
                                 </NavbarMenuItem>
                             ))
                         }
+                        <NavbarMenuItem>
+                            <button onClick={() => window.location.href='/api/auth/logout'}>Logout</button>
+                        </NavbarMenuItem>
                     </NavbarMenu>
                 </>
             )}
