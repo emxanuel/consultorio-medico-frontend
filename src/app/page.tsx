@@ -7,7 +7,9 @@ export default async function Page() {
 
     return (
         <main className="flex flex-col gap-10 justify-center items-center pt-40">
-            <h1 className="text-2xl">Iniciar sesión</h1>
+            <h1 className="text-4xl font-bold text-center text-blue-600">
+                ¡Bienvenido! Por favor, inicia sesión
+            </h1>
             <Login />
             {/* <PaypalButton /> */}
         </main>

@@ -27,7 +27,7 @@ export default function RegistrationForm() {
                 value={accountName}
                 onChange={(e) => setAccountName(e.target.value)}
             />
-            <Button className="max-w-80" disabled={signUpMutation.isPending} onClick={handleClick} fullWidth color="primary" variant="bordered">Crear cuenta</Button>
+            <Button className="w-full" disabled={signUpMutation.isPending} onClick={handleClick} color="primary" variant="bordered">Crear cuenta</Button>
         </form>
     )
 }
