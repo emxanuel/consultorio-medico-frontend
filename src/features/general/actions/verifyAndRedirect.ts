@@ -5,40 +5,45 @@ import { verifyUser } from "@/features/general/actions/verifyUser"
 
 export const verifyAndRedirect = async (accountKey?: string, isOnFinishRegister?: boolean) => {
 
-    if (accountKey){
+    try{
+        if (accountKey){
+            const session = await getSession()
+            const user = session?.user
+            const verified = await verifyUser(user?.email)
+    
+            if (!verified){
+                redirect('/')
+            }
+            return
+        }
+    
         const session = await getSession()
         const user = session?.user
         const verified = await verifyUser(user?.email)
-
-        if (!verified){
-            redirect('/')
-        }
-        return
-    }
-
-    const session = await getSession()
-    const user = session?.user
-    const verified = await verifyUser(user?.email)
-    const accounts = await getAccounts(user?.email)
-
-    if (user){
-        if (!verified && !isOnFinishRegister){
-            redirect('/finalizar-registro')
-        }
-        if (verified){
-            if (accounts.length > 1){
-                redirect('/seleccionar-cuenta')
+        const accounts = await getAccounts(user?.email)
+    
+        if (user){
+            if (!verified && !isOnFinishRegister){
+                redirect('/finalizar-registro')
             }
-            if (accounts.length === 1){
-                redirect(`/${accounts[0].account_key}`)
+            if (verified){
+                if (accounts.length > 1){
+                    redirect('/seleccionar-cuenta')
+                }
+                if (accounts.length === 1){
+                    redirect(`/${accounts[0].account_key}`)
+                }
             }
         }
+        
+        
+    
+        return {
+            email: user?.email,
+            accounts
+        }
     }
-    
-    
-
-    return {
-        email: user?.email,
-        accounts
+    catch{
+        redirect('/')
     }
 }
