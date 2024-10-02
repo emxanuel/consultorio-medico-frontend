@@ -3,11 +3,11 @@ import { redirect, RedirectType } from "next/navigation"
 import { getAccounts } from "@/features/general/actions/getAccounts"
 import { verifyUser } from "@/features/general/actions/verifyUser"
 
-export const verifyAndRedirect = async (accountKey?: string, isOnFinishRegister?: boolean) => {
+export const verifyAndRedirect = async (accountKey?: string, isOnFinishRegister?: boolean, isOnHome?: boolean) => {
     if (accountKey) {
         const session = await getSession()
         if (!session || !session.user) {
-            redirect('/api/auth/login')
+            redirect('/')
         }
         const user = session.user
         const verified = await verifyUser(user?.email)
@@ -19,9 +19,18 @@ export const verifyAndRedirect = async (accountKey?: string, isOnFinishRegister?
     }
     
     const session = await getSession()
-    if (!session || !session.user) {
-        redirect('/api/auth/login')
+    
+    if (!isOnHome){
+        if (!session || !session.user) {
+            redirect('/')
+        }
     }
+    else{
+        if (!session || !session.user) {
+            return
+        }
+    }
+
     
     const user = session.user
     const [verified, accounts] = await Promise.all([

@@ -3,7 +3,7 @@ import { verifyAndRedirect } from "@/features/general/actions/verifyAndRedirect"
 import Login from "@/features/login/componets/Login"
 
 export default async function Page() {
-    await verifyAndRedirect()
+    await verifyAndRedirect(undefined, false, true)
 
     return (
         <main className="flex flex-col gap-10 justify-center items-center pt-40">
