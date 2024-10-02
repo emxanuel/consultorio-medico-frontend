@@ -2,6 +2,7 @@ import { verifyAndRedirect } from "@/features/general/actions/verifyAndRedirect"
 import RegistrationForm from "@/features/login/componets/RegistrationForm"
 
 export default async function Page(){
+    console.log('isOnFinishRegister', true)
     await verifyAndRedirect(undefined, true)
     return (
         <main className="min-h-screen flex flex-col items-center justify-center w-screen">
