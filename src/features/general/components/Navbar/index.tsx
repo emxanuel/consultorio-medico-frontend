@@ -56,37 +56,33 @@ export default function Navbar() {
                     <h1>{storeUser.actualAccount?.name}</h1>
                 </Link>
             </NavbarBrand>
-            {
-                <>
-                    {user && links.map((link, index) => (
-                        <NavbarItem key={index} className="hidden md:block">
-                            <Link href={link.url}>{link.name}</Link>
-                        </NavbarItem>
-                    ))}
-                    <NavbarItem className="hidden md:block">
-                        <button onClick={() => window.location.href='/api/auth/logout'}>Logout</button>
+            <>
+                {links.map((link, index) => (
+                    <NavbarItem key={index} className="hidden md:block">
+                        <Link href={user ? link.url : ''}>{link.name}</Link>
                     </NavbarItem>
-                </>
-            }
-            {user && (
-                <>
-                    <NavbarMenuToggle className="md:hidden" />
-                    <NavbarMenu style={{
-                        backgroundColor: 'rgba(255, 255, 255, 0.5)',
-                    }}>
-                        {
-                            links.map((link, index) => (
-                                <NavbarMenuItem key={index}>
-                                    <Link onClick={() => setIsMenuOpen()} href={link.url}>{link.name}</Link>
-                                </NavbarMenuItem>
-                            ))
-                        }
-                        <NavbarMenuItem>
-                            <button onClick={() => window.location.href='/api/auth/logout'}>Logout</button>
-                        </NavbarMenuItem>
-                    </NavbarMenu>
-                </>
-            )}
+                ))}
+                <NavbarItem className="hidden md:block">
+                    <button onClick={() => window.location.href = '/api/auth/logout'}>Logout</button>
+                </NavbarItem>
+            </>
+            <>
+                <NavbarMenuToggle className="md:hidden" />
+                <NavbarMenu style={{
+                    backgroundColor: 'rgba(255, 255, 255, 0.5)',
+                }}>
+                    {
+                        links.map((link, index) => (
+                            <NavbarMenuItem key={index}>
+                                <Link onClick={() => setIsMenuOpen()} href={user? link.url: ''}>{link.name}</Link>
+                            </NavbarMenuItem>
+                        ))
+                    }
+                    <NavbarMenuItem>
+                        <button onClick={() => window.location.href = '/api/auth/logout'}>Logout</button>
+                    </NavbarMenuItem>
+                </NavbarMenu>
+            </>
         </Nav>
     )
 }
