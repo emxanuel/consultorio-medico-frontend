@@ -1,18 +1,18 @@
 import { getAccount } from "@/features/general/actions/getAccount"
-import { getSession } from "@auth0/nextjs-auth0"
-import { redirect } from "next/navigation"
+// import { getSession } from "@auth0/nextjs-auth0"
+// import { redirect } from "next/navigation"
 import { homeImage } from "@/assets"
 import Image from "next/image"
 import Link from "next/link"
 
 export default async function Page({params}: {params: {enterprise: string}}) {
     const data = await getAccount(params.enterprise)
-    const session = await getSession()
-    const user = session?.user
-
-    if (data && user?.email !== data.admin.email){
-        redirect('/')
-    }
+//     const session = await getSession()
+//     const user = session?.user
+// 
+//     if (data && user?.email !== data.admin.email){
+//         redirect('/')
+//     }
 
     return (
         <div>

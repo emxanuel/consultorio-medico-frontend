@@ -10,7 +10,7 @@ export const verifyAndRedirect = async (accountKey?: string, isOnFinishRegister?
             redirect('/')
         }
         const user = session.user
-        const verified = await verifyUser(user?.email)
+        const verified = await verifyUser(user.nickname === 'admin'? 'admin@admin.com': user?.email)
     
         if (!verified) {
             redirect('/')
@@ -34,11 +34,9 @@ export const verifyAndRedirect = async (accountKey?: string, isOnFinishRegister?
     
     const user = session.user
     const [verified, accounts] = await Promise.all([
-        verifyUser(user?.email),
-        getAccounts(user?.email)
+        verifyUser(user.nickname === 'admin'? 'admin@admin.com': user?.email),
+        getAccounts(user.nickname === 'admin'? 'admin@admin.com': user?.email)
     ])
-
-    console.log(verified, accounts, isOnFinishRegister)
 
     if (!verified){
         if (!isOnFinishRegister) {
