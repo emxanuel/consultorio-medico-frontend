@@ -1,0 +1,11 @@
+{
+    "sign_up": {
+        "welcome": "Welcome! Please sign up",
+        "welcome_button_label": "Sign Up",
+        "finish_register": {
+            "title":  "Finish your registration",
+            "subtitle": "Please, complete your registration to access all the platform services",
+            "button_label": "Finish registration"
+        }
+    }
+}

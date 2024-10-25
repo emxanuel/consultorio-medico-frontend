@@ -1,0 +1,11 @@
+{
+    "sign_up": {
+        "welcome": "!Bienvenido! Por favor, inicia sesión",
+        "welcome_button_label": "Entrar",
+        "finish_register": {
+            "title":  "Finaliza tu registro",
+            "subtitle": "Por favor, completa tu registro para poder acceder a todos los servicios de la plataforma",
+            "button_label": "Finalizar registro"
+        }
+    }
+}

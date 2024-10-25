@@ -6,9 +6,11 @@ export const getConsultations = async (
   from: string | null,
   to: string | null,
   statuses: string[],
-  accountKey: string
+  accountKey: string,
+  token: string
 ) => {
   try {
+
     let query = `?accountKey=${accountKey}&name=${name}&`;
     if (from && to) {
       query = query + `dateRange=${dayjs(from).format("YYYY-MM-DD")},${dayjs(to).format("YYYY-MM-DD")}&`;
@@ -17,7 +19,11 @@ export const getConsultations = async (
       query = query + (`${status}=true&`);
     });
 
-    const response = await api.get(`/visits${query}`);
+    const response = await api.get(`/visits${query}`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
     return response.data;
   } catch (error) {
     console.log(error);

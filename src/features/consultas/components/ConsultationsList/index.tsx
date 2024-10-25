@@ -24,7 +24,7 @@ const ConsultationsList: React.FC<Props> = () => {
 
     useEffect(() => {
         consultationsQuery.refetch()
-    }, [name, from, to, statuses, consultationsQuery])
+    }, [name, from, to, statuses])
 
     return (
         <div className={styles.container}>
