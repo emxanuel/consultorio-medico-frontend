@@ -10,7 +10,7 @@ export const verifyAndRedirect = async (accountKey?: string, isOnFinishRegister?
             redirect('/')
         }
         const user = session.user
-        const verified = await verifyUser(user.nickname === 'admin'? 'admin@admin.com': user?.email)
+        const verified = await verifyUser(user.nickname === 'admin'? 'admin@admin.com': user?.email) //TODO: Change this to user.email
     
         if (!verified) {
             redirect('/')
@@ -33,10 +33,7 @@ export const verifyAndRedirect = async (accountKey?: string, isOnFinishRegister?
 
     
     const user = session.user
-    const [verified, accounts] = await Promise.all([
-        verifyUser(user.nickname === 'admin'? 'admin@admin.com': user?.email),
-        getAccounts(user.nickname === 'admin'? 'admin@admin.com': user?.email)
-    ])
+    const verified = await verifyUser(user.nickname === 'admin'? 'admin@admin.com': user?.email) //TODO: Change this to user.email
 
     if (!verified){
         if (!isOnFinishRegister) {
@@ -47,7 +44,9 @@ export const verifyAndRedirect = async (accountKey?: string, isOnFinishRegister?
         }
     }
     
-    if (verified) {
+    if (verified) { 
+        const accounts = await getAccounts(user.nickname === 'admin'? 'admin@admin.com': user?.email) //TODO: Change this to user.email
+        //TODO: validate if I have access to the account
         if (accounts.length > 1) {
             redirect('/seleccionar-cuenta')
         }

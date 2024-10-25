@@ -1,4 +1,4 @@
-// import PaypalButton from "@/features/general/components/PaypalButton"
+import PaypalButton from "@/features/general/components/PaypalButton"
 import { verifyAndRedirect } from "@/features/general/actions/verifyAndRedirect"
 import Login from "@/features/login/componets/Login"
 import { getDictionary, Locale } from "@/dictionaries/getDictionary"
@@ -19,7 +19,7 @@ export default async function Page({ params }: { params: IParams }) {
                 {dictionary.sign_up.welcome}
             </h1>
             <Login />
-            {/* <PaypalButton /> */}
+            <PaypalButton />
         </main>
     )
 }

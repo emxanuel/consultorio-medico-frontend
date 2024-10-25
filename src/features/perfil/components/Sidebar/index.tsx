@@ -3,6 +3,7 @@ export default function Sidebar(){
         <nav className="p-5 min-h-[28.45rem] border-r border-r-gray-800">
             <ul>
                 <li>Perfil</li>
+                <li>Licenciamiento</li>
                 <li>Configuración</li>
                 <li>Seguridad</li>
             </ul>
