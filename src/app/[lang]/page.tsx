@@ -11,12 +11,12 @@ interface IParams {
 export default async function Page({ params }: { params: IParams }) {
     await verifyAndRedirect(undefined, false, true)
     const lang = params.lang
-    const dictionary = getDictionary(lang as Locale)
+    const dictionary = await getDictionary(lang as Locale)
 
     return (
         <main className="flex flex-col gap-10 justify-center items-center pt-40">
             <h1 className="text-2xl md:text-4xl font-bold text-center text-blue-600">
-                {(await dictionary).sign_up.welcome}
+                {dictionary.sign_up.welcome}
             </h1>
             <Login />
             {/* <PaypalButton /> */}

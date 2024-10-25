@@ -13,8 +13,11 @@ export function middleware(request: NextRequest) {
   const pathnameHasLocale = locales.some(
     (locale) => pathname.startsWith(`/${locale}/`) || pathname === `/${locale}`
   );
+  const isInApi = pathname.startsWith("/api");
+  
 
   if (pathnameHasLocale) return;
+  if (isInApi) return;
 
   // Redirect if there is no locale
   const locale = getLocale(request);
