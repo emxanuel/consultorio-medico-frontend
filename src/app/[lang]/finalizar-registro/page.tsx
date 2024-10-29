@@ -1,6 +1,6 @@
 import { getDictionary, Locale } from "@/dictionaries/getDictionary"
-import { verifyAndRedirect } from "@/features/general/actions/verifyAndRedirect"
-import RegistrationForm from "@/features/login/componets/RegistrationForm"
+import { verifyAndRedirect } from "@/actions/common/verify-and-redirect"
+import RegistrationForm from "@/components/features/auth/registration-form"
 
 interface IParams {
     lang: string

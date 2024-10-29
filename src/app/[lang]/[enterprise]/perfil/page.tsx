@@ -1,4 +1,4 @@
-import UpdateForm from "@/features/perfil/components/UpdateForm"
+import UpdateForm from "@/components/features/profile/update-form"
 import { getSession } from "@auth0/nextjs-auth0"
 import Image from "next/image"
 

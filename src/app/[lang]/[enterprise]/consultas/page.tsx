@@ -1,8 +1,8 @@
-import ConsultationsList from "@/features/consultas/components/ConsultationsList";
+import ConsultationsList from "@/components/features/consultations/consultations-list";
 import { Metadata } from "next";
 
 import styles from './styles.module.css'
-import { verifyAndRedirect } from "@/features/general/actions/verifyAndRedirect";
+import { verifyAndRedirect } from "@/actions/common/verify-and-redirect";
 
 export const metadata: Metadata = {
     title: "Consultas"

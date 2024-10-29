@@ -1,4 +1,4 @@
-import { getAccount } from "@/features/general/actions/getAccount"
+import { getAccount } from "@/actions/common/get-account"
 import { getSession } from "@auth0/nextjs-auth0"
 import { redirect } from "next/navigation"
 import { homeImage } from "@/assets"

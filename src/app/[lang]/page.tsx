@@ -1,6 +1,6 @@
-import PaypalButton from "@/features/general/components/PaypalButton"
-import { verifyAndRedirect } from "@/features/general/actions/verifyAndRedirect"
-import Login from "@/features/login/componets/Login"
+import PaypalButton from "@/components/common/paypal-button"
+import { verifyAndRedirect } from "@/actions/common/verify-and-redirect"
+import Login from "@/components/features/auth/login-form"
 import { getDictionary, Locale } from "@/dictionaries/getDictionary"
 
 
