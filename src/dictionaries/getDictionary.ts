@@ -1,10 +1,11 @@
-import 'server-only'
+import en from './en.json'
+import es from './es.json'
 
 export type Locale = 'en' | 'es'
  
 const dictionaries = {
-  en: () => import('./en.json').then((module) => module.default),
-  es: () => import('./es.json').then((module) => module.default),
+  en,
+  es
 }
  
-export const getDictionary = async (locale: Locale) => dictionaries[locale]()
+export const getDictionary = (locale: Locale) => dictionaries[locale]

@@ -5,6 +5,10 @@ import { QueryClient, QueryClientProvider, isServer } from "@tanstack/react-quer
 import { UserProvider } from "@auth0/nextjs-auth0/client";
 import { NextUIProvider } from "@nextui-org/react";
 import { PayPalScriptProvider } from "@paypal/react-paypal-js";
+import DictionaryProvider from "@/dictionaries/dictionary-provider";
+import { getDictionary } from "@/dictionaries/getDictionary";
+import { Language } from "@/types/language";
+import { useParams } from "next/navigation";
 
 let browserQueyClient: QueryClient | undefined = undefined;
 
@@ -39,16 +43,21 @@ const paypalInitialOptions = {
 
 interface Props {
     children: React.ReactNode;
+    params: { lang: string }
 }
 
 const Providers: React.FC<Props> = ({ children }) => {
     const queryClient = getQueryClient()
+    const params = useParams()
+    const dictionary = getDictionary(params.lang as Language)
     return (
         <QueryClientProvider client={queryClient}>
             <NextUIProvider>
                 <UserProvider>
                     <PayPalScriptProvider options={paypalInitialOptions}>
-                        {children}
+                        <DictionaryProvider dictionary={dictionary}>
+                            {children}
+                        </DictionaryProvider>
                     </PayPalScriptProvider>
                 </UserProvider>
             </NextUIProvider>

@@ -14,7 +14,7 @@ import { getLocalTimeZone, today } from '@internationalized/date'
 
 import styles from './styles.module.css'
 import { RadioButton } from 'primereact/radiobutton'
-import { createPatient } from '../../../../features/registro/actions/createPatient'
+import { createPatient } from '@/actions/features/register/create-patient'
 import dayjs from 'dayjs'
 import { userStore } from '@/store/user-store'
 import { useMutation } from '@tanstack/react-query'

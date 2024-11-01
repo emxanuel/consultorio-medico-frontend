@@ -1,5 +1,5 @@
 import api from "@/api";
-import { convertFormData } from "../helpers/convertTypes";
+import { convertFormData } from "@/helpers/features/register/convertTypes";
 import { FormData } from "@/types";
 
 export const createPatient = async (data: FormData, accountKey: string) => {
