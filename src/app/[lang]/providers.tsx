@@ -43,7 +43,6 @@ const paypalInitialOptions = {
 
 interface Props {
     children: React.ReactNode;
-    params: { lang: string }
 }
 
 const Providers: React.FC<Props> = ({ children }) => {

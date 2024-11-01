@@ -9,7 +9,7 @@ interface IParams {
 export default function EnterpriseLayout({ children, params }: { children: ReactNode, params: IParams }) {
     return (
         <main className="flex flex-col w-full">
-            <Navbar language={params.lang}/>
+            <Navbar />
             {children}
             <Footer />
         </main>
