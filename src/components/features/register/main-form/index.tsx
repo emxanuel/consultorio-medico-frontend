@@ -18,6 +18,7 @@ import { createPatient } from '@/actions/features/register/create-patient'
 import dayjs from 'dayjs'
 import { userStore } from '@/store/user-store'
 import { useMutation } from '@tanstack/react-query'
+import { useDictionary } from '@/dictionaries/dictionary-provider'
 
 interface Props {
     data?: FormData,
@@ -25,6 +26,8 @@ interface Props {
 }
 
 export default function MainForm({ data, readonly }: Props) {
+
+    const dictionary = useDictionary().form_patients_registration
 
     const [showARS, setShowARS] = useState(false)
     const [message, setMessage] = useState('')
@@ -107,65 +110,67 @@ export default function MainForm({ data, readonly }: Props) {
     return (
         <form className={`${styles.container} ${readonly && styles.whiteText}`}>
             <div className={styles.personalInformation}>
-                <h1 className='text-xl'>Información del paciente</h1>
+                <h1 className='text-xl'>{dictionary.subtitle}</h1>
                 <div className={styles.inputs}>
-                    <Input onChange={handleChange} name='firstName' label='Nombre del paciente' value={formData.firstName} isDisabled={readonly} isRequired />
-                    <Input onChange={handleChange} name='lastName' label='Apellido' value={formData.lastName} isDisabled={readonly} isRequired />
-                    <Input onChange={handleChange} name="age" type='number' max={120} label='Edad' value={formData.age} isDisabled={readonly} isRequired />
-                    <Select value={formData.gender} onChange={(e) => setFormData({ ...formData, gender: e.target.value as Gender })} label='Genero' isDisabled={readonly} isRequired>
+                    <Input onChange={handleChange} name='firstName' label={dictionary.form.name} value={formData.firstName} isDisabled={readonly} isRequired />
+                    <Input onChange={handleChange} name='lastName' label={dictionary.form.last_name} value={formData.lastName} isDisabled={readonly} isRequired />
+                    <Input onChange={handleChange} name="age" type='number' max={120} label={dictionary.form.age} value={formData.age} isDisabled={readonly} isRequired />
+                    <Select value={formData.gender} onChange={(e) => setFormData({ ...formData, gender: e.target.value as Gender })} label={dictionary.form.gender} isDisabled={readonly} isRequired>
                         {genders.map(g => (
                             <SelectItem key={g} value={g}>{g}</SelectItem>
                         ))}
                     </Select>
-                    <Select value={formData.maritalStatus} onChange={(e) => setFormData({ ...formData, maritalStatus: e.target.value as MaritalStatus })} label='Estado civil' isDisabled={readonly}>
+                    <Select value={formData.maritalStatus} onChange={(e) => setFormData({ ...formData, maritalStatus: e.target.value as MaritalStatus })} label={dictionary.form.marital_status} isDisabled={readonly}>
                         {maritalStatuses.map(m => (
                             <SelectItem key={m} value={m}>{m}</SelectItem>
                         ))}
                     </Select>
                     {readonly ? (
-                        <Input onChange={handleChange} name='birthDate' label='Fecha de nacimiento' value={dayjs(formData.birthDate).toDate().toLocaleDateString()} isDisabled={readonly} isRequired />
+                        <Input onChange={handleChange} name='birthDate' label={dictionary.form.birthdate} value={dayjs(formData.birthDate).toDate().toLocaleDateString()} isDisabled={readonly} isRequired />
                     ) : (
-                        <DatePicker minValue={today(getLocalTimeZone()).subtract({years: 300})} showMonthAndYearPickers onChange={(e) => setFormData({ ...formData, birthDate: e.toString() })} label='Fecha de nacimiento' isRequired />
+                        <DatePicker minValue={today(getLocalTimeZone()).subtract({years: 300})} showMonthAndYearPickers onChange={(e) => setFormData({ ...formData, birthDate: e.toString() })} label={dictionary.form.birthdate} isRequired />
                     )}
-                    <Input onChange={handleChange} name='birthPlace' label='Lugar de nacimiento' value={formData.birthPlace} isDisabled={readonly} />
-                    <Input onChange={handleChange} name='nationality' label='Nacionalidad' value={formData.nationality} isDisabled={readonly} />
-                    <Input onChange={handleChange} name='religion' label='Religion' value={formData.religion} isDisabled={readonly} />
-                    <Input onChange={handleChange} name='ocupation' label='Ocupacion' value={formData.ocupation} isDisabled={readonly} isRequired />
-                    <Input onChange={handleChange} name='documentId' label='Cedula' value={formData.documentId} isDisabled={readonly} isRequired />
-                    <Input onChange={handleChange} name='address' label='Direccion' value={formData.address} isDisabled={readonly} />
-                    <Input onChange={handleChange} name='residentialPhone' label='Telefono residencial' value={formData.residentialPhone} isDisabled={readonly} />
-                    <Input onChange={handleChange} name='cellphone' label='Celular' value={formData.cellphone} isDisabled={readonly} isRequired />
+                    <Input onChange={handleChange} name='birthPlace' label={dictionary.form.birth_place} value={formData.birthPlace} isDisabled={readonly} />
+                    <Input onChange={handleChange} name='nationality' label={dictionary.form.nationality} value={formData.nationality} isDisabled={readonly} />
+                    <Input onChange={handleChange} name='religion' label={dictionary.form.religion} value={formData.religion} isDisabled={readonly} />
+                    <Input onChange={handleChange} name='ocupation' label={dictionary.form.occupation} value={formData.ocupation} isDisabled={readonly} isRequired />
+                    <Input onChange={handleChange} name='documentId' label={dictionary.form.id} value={formData.documentId} isDisabled={readonly} isRequired />
+                    <Input onChange={handleChange} name='address' label={dictionary.form.address} value={formData.address} isDisabled={readonly} />
+                    <Input onChange={handleChange} name='residentialPhone' label={dictionary.form.residential_phone} value={formData.residentialPhone} isDisabled={readonly} />
+                    <Input onChange={handleChange} name='cellphone' label={dictionary.form.phone} value={formData.cellphone} isDisabled={readonly} isRequired />
                 </div>
 
             </div>
             <div className={styles.emergencyContact}>
-                <h1 className='text-xl'>Contacto de emergencia</h1>
+                <h1 className='text-xl'>{dictionary.form.emergency_contact.title}</h1>
                 <div className={styles.inputs}>
-                    <Input isRequired onChange={handleChange} name='emergencyContactName' label='Nombre' value={formData.emergencyContactName} isDisabled={readonly} />
-                    <Input onChange={handleChange} name='emergencyContactResidentialPhone' label='Telefono residencial' value={formData.emergencyContactResidentialPhone} isDisabled={readonly} />
-                    <Input isRequired onChange={handleChange} name='emergencyContactCellphone' label='Celular' value={formData.emergencyContactCellphone} isDisabled={readonly} />
-                    <Input isRequired onChange={handleChange} name='emergencyContactRelationship' label='Parentesco' value={formData.emergencyContactRelationship} isDisabled={readonly} />
-                    <Input onChange={handleChange} name='emergencyContactAddress' label='Direccion' value={formData.emergencyContactAddress} isDisabled={readonly} />
+                    <Input isRequired onChange={handleChange} name='emergencyContactName' label={dictionary.form.emergency_contact.name} value={formData.emergencyContactName} isDisabled={readonly} />
+                    <Input onChange={handleChange} name='emergencyContactResidentialPhone' label={dictionary.form.emergency_contact.residential_phone} value={formData.emergencyContactResidentialPhone} isDisabled={readonly} />
+                    <Input isRequired onChange={handleChange} name='emergencyContactCellphone' label={dictionary.form.emergency_contact.phone} value={formData.emergencyContactCellphone} isDisabled={readonly} />
+                    <Input isRequired onChange={handleChange} name='emergencyContactRelationship' label={dictionary.form.emergency_contact.relationship} value={formData.emergencyContactRelationship} isDisabled={readonly} />
+                    <Input onChange={handleChange} name='emergencyContactAddress' label={dictionary.form.emergency_contact.address} value={formData.emergencyContactAddress} isDisabled={readonly} />
                 </div>
             </div>
             <div className={styles.ARS}>
-                <h1 className='text-xl'>ARS</h1>
+                <h1 className='text-xl'>{dictionary.form.assurance.title}</h1>
                 <div className='flex gap-4'>
-                    <label>¿Tiene ARS?</label>
+                    <label>{dictionary.form.assurance.question}</label>
                     <div className='flex items-center gap-2'>
+                        <label>{dictionary.form.assurance.yes}</label>
                         <RadioButton className='border border-[#ccc] rounded-full' inputId="yes" name="hasAssurance" value={true} onChange={(e) => setFormData({ ...formData, hasAssurance: e.value })} checked={formData.hasAssurance} aria-label='hasAssurance' />
                     </div>
                     <div className='flex items-center gap-2'>
+                        <label>{dictionary.form.assurance.no}</label>
                         <RadioButton className='border border-[#ccc] rounded-full' inputId="no" name="hasAssurance" value={false} onChange={(e) => setFormData({ ...formData, hasAssurance: e.value })} checked={!formData.hasAssurance} aria-label='hasAssurance' />
                     </div>
                 </div>
                 <div className={styles.inputs} style={{ display: readonly ? 'grid' : showARS ? 'grid' : 'none' }}>
-                    <Input onChange={handleChange} name='ARSName' label='Nombre' value={formData.ARSName} isDisabled={readonly} />
-                    <Input onChange={handleChange} name='ARSCardholder' label='Titular' value={formData.ARSCardholder} isDisabled={readonly} />
-                    <Input onChange={handleChange} name='ARSPrimaryInsured' label='Asegurado principal' value={formData.ARSPrimaryInsured} isDisabled={readonly} />
-                    <Input onChange={handleChange} name='ARSPlan' label='Plan' value={formData.ARSPlan} isDisabled={readonly} />
-                    <Input onChange={handleChange} name='ARSContractNumber' label='Numero de contrato' value={formData.ARSContractNumber} isDisabled={readonly} />
-                    <Select value={formData.ARSPrimaryInsuredRelationship} onChange={(e) => setFormData({ ...formData, ARSPrimaryInsuredRelationship: e.target.value as PrimaryInsuredRelationship })} label='Parentesco' isDisabled={readonly}>
+                    <Input onChange={handleChange} name='ARSName' label={dictionary.form.assurance.name} value={formData.ARSName} isDisabled={readonly} />
+                    <Input onChange={handleChange} name='ARSCardholder' label={dictionary.form.assurance.card_holder} value={formData.ARSCardholder} isDisabled={readonly} />
+                    <Input onChange={handleChange} name='ARSPrimaryInsured' label={dictionary.form.assurance.primary_insured} value={formData.ARSPrimaryInsured} isDisabled={readonly} />
+                    <Input onChange={handleChange} name='ARSPlan' label={dictionary.form.assurance.plan} value={formData.ARSPlan} isDisabled={readonly} />
+                    <Input onChange={handleChange} name='ARSContractNumber' label={dictionary.form.assurance.contract_number} value={formData.ARSContractNumber} isDisabled={readonly} />
+                    <Select value={formData.ARSPrimaryInsuredRelationship} onChange={(e) => setFormData({ ...formData, ARSPrimaryInsuredRelationship: e.target.value as PrimaryInsuredRelationship })} label={dictionary.form.assurance.relationship} isDisabled={readonly}>
                         {primaryInsuredRelationships.map(p => (
                             <SelectItem key={p} value={p}>{p}</SelectItem>
                         ))}

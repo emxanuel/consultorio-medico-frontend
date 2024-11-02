@@ -1,15 +1,19 @@
 import MainForm from "@/components/features/register/main-form";
 import styles from './styles.module.css'
 import { Metadata } from "next";
+import { getDictionary } from "@/dictionaries/getDictionary";
+import { Language } from "@/types/language";
 
 export const metadata: Metadata = {
   title: "Registro"
 }
 
-export default function Page() {
+export default async function Page({params}: {params: {lang: string}}) {
+  const dictionary = await getDictionary(params.lang as Language)
+
   return (
     <div className={styles.container}>
-      <h1 className="text-2xl font-bold">Registro para consulta</h1>
+      <h1 className="text-2xl font-bold">{dictionary.form_patients_registration.title}</h1>
       <MainForm />
     </div>
   );

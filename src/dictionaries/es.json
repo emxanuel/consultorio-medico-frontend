@@ -16,5 +16,46 @@
     "navbar": {
         "register": "Registro",
         "consultations": "Consultas"
+    },
+    "form_patients_registration": {
+        "title": "Registro para consultas",
+        "subtitle": "Información del paciente",
+        "form": {
+            "name": "Nombre del paciente",
+            "last_name": "Apellido",
+            "age": "Edad",
+            "gender": "Género",
+            "marital_status": "Estado civil",
+            "birthdate": "Fecha de nacimiento",
+            "phone": "Teléfono",
+            "birth_place": "Lugar de nacimiento",
+            "address": "Dirección",
+            "religion": "Religión",
+            "id": "Cédula",
+            "residential_phone": "Teléfono residencial",
+            "nationality": "Nacionalidad",
+            "occupation": "Ocupación",
+            "emergency_contact": {
+                "title": "Contacto de emergencia",
+                "name": "Nombre",
+                "phone": "Teléfono",
+                "relationship": "Parentesco",
+                "address": "Dirección",
+                "residential_phone": "Teléfono residencial"
+            },
+            "assurance": {
+                "title": "ARS",
+                "question": "¿Tiene seguro médico?",
+                "yes": "Sí",
+                "no": "No",
+                "name": "Nombre de la ARS",
+                "card_holder": "Titular",
+                "primary_insured": "Asegurado principal",
+                "plan": "Plan",
+                "contract_number": "Número de contrato",
+                "relationship": "Parentesco"
+            },
+            "reason": "Motivo de la consulta"
+        }
     }
 }

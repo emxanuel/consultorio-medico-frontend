@@ -16,5 +16,46 @@
     "navbar": {
         "register": "Register",
         "consultations": "Consultations"
+    },
+    "form_patients_registration": {
+        "title": "Consultation Registration",
+        "subtitle": "Patient Information",
+        "form": {
+            "name": "Patient's Name",
+            "last_name": "Last Name",
+            "age": "Age",
+            "gender": "Gender",
+            "marital_status": "Marital Status",
+            "birthdate": "Birthdate",
+            "phone": "Phone",
+            "birth_place": "Birth Place",
+            "address": "Address",
+            "religion": "Religion",
+            "id": "ID",
+            "residential_phone": "Residential Phone",
+            "nationality": "Nationality",
+            "occupation": "Occupation",
+            "emergency_contact": {
+                "title": "Emergency Contact",
+                "name": "Name",
+                "phone": "Phone",
+                "relationship": "Relationship",
+                "address": "Address",
+                "residential_phone": "Residential Phone"
+            },
+            "assurance": {
+                "title": "Health Insurance",
+                "question": "Do you have health insurance?",
+                "yes": "Yes",
+                "no": "No",
+                "name": "Insurance Name",
+                "card_holder": "Card Holder",
+                "primary_insured": "Primary Insured",
+                "plan": "Plan",
+                "contract_number": "Contract Number",
+                "relationship": "Relationship"
+            },
+            "reason": "Reason for Consultation"
+        }
     }
 }
