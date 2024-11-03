@@ -57,5 +57,22 @@
             },
             "reason": "Motivo de la consulta"
         }
+    },
+    "consultations": {
+        "title": "Consultas",
+        "search": "Buscar por nombre",
+        "from": "Desde",
+        "to": "Hasta",
+        "pending": "Pendientes",
+        "processed": "Procesadas",
+        "cancelled": "Canceladas",
+        "process": "Procesar",
+        "cancel": "Cancelar",
+        "no_consultations": "No se encontraron consultas",
+        "diagnosis": "Diagnóstico",
+        "reason": "Motivo"
+    },
+    "common": {
+        "loading": "Cargando..."
     }
 }

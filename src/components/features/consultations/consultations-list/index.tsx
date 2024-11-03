@@ -8,11 +8,13 @@ import Filter from "../filter";
 
 import styles from './styles.module.css'
 import { userStore } from "@/store/user-store";
+import { useDictionary } from "@/dictionaries/dictionary-provider";
 
 interface Props {
 }
 
 const ConsultationsList: React.FC<Props> = () => {
+    const dictionary = useDictionary()
 
     const [name, setName] = useState('')
     const [from, setFrom] = useState('')
@@ -29,8 +31,8 @@ const ConsultationsList: React.FC<Props> = () => {
     return (
         <div className={styles.container}>
             <Filter setFrom={setFrom} setName={setName} setTo={setTo} statuses={statuses} setStatuses={setStatuses} />
-            {consultationsQuery.isLoading && <p className="p-[12px]">Cargando...</p>}
-            {consultationsQuery.data?.length === 0 && <p className="p-[12px]">No hay consultas</p>}
+            {consultationsQuery.isLoading && <p className="p-[12px]">{dictionary.common.loading}</p>}
+            {consultationsQuery.data?.length === 0 && <p className="p-[12px]">{dictionary.consultations.no_consultations}</p>}
             {consultationsQuery.data?.map((consultation: any, index: number) => (
                 <Consultation
                     key={index}

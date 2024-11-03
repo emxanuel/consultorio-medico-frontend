@@ -57,5 +57,22 @@
             },
             "reason": "Reason for Consultation"
         }
+    },
+    "consultations": {
+        "title": "Consultations",
+        "search": "Search by name",
+        "from": "From",
+        "to": "To",
+        "pending": "Pending",
+        "processed": "Processed",
+        "cancelled": "Cancelled",
+        "process": "Process",
+        "cancel": "Cancel",
+        "no_consultations": "No consultations found",
+        "diagnosis": "Diagnosis",
+        "reason": "Reason"
+    },
+    "common": {
+        "loading": "Loading..."
     }
 }
