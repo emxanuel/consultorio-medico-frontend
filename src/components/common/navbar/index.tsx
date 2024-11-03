@@ -57,11 +57,11 @@ export default function Navbar() {
 
 	const userLinks = [
 		{
-			name: "Perfil",
+			name: dictionary.profile,
 			url: `/${storeUser.actualAccount?.account_key}/perfil`
 		},
 		{
-			name: "Logout",
+			name: dictionary.logout,
 			url: '/api/auth/logout'
 		}
 	]

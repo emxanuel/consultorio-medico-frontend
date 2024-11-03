@@ -15,7 +15,9 @@
     },
     "navbar": {
         "register": "Register",
-        "consultations": "Consultations"
+        "consultations": "Consultations",
+        "profile": "Profile",
+        "logout": "Logout"
     },
     "form_patients_registration": {
         "title": "Consultation Registration",
