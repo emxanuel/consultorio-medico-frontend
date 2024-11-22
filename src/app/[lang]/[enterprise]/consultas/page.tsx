@@ -12,7 +12,7 @@ export const metadata: Metadata = {
 
 export default async function ConsultasPage({params}: {params: {enterprise: string, lang: string}}) {
     await verifyAndRedirect(params.enterprise)
-    const dictionary = (await getDictionary(params.lang as Language)).consultations
+    const dictionary = getDictionary(params.lang as Language).consultations
     return (
         <div className={styles.container}>
             <h1>{dictionary.title}</h1>

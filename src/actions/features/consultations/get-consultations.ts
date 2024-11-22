@@ -19,6 +19,7 @@ export const getConsultations = async (
       query = query + (`${status}=true&`);
     });
 
+    console.log(token)
     const response = await api.get(`/visits${query}`, {
       headers: {
         Authorization: `Bearer ${token}`,

@@ -5,6 +5,7 @@ export type User = {
     email: string;
     accounts: Array<unknown>;
     actualAccount: Account;
+    token: string;
 };
 
 export type Account = {
@@ -36,12 +37,13 @@ export const userStore = create(
                 admin: {
                     email: ''
                 }
-            }
+            },
+            token: '',
         },
         setUser: (user: User) => set({ user }),
         setAccounts: (accounts: Array<unknown>) => set((state: { user: User }) => ({ user: { ...state.user, accounts } })),
         setActualAccount: (actualAccount: Account) => set((state: { user: User }) => ({ user: { ...state.user, actualAccount } })),
-        logout: () => set({ user: { email: '', accounts: [], actualAccount: { name: '', account_key: '', created_at: '', admin: { email: '' } } } })
+        logout: () => set({ user: { email: '', accounts: [], token: '', actualAccount: { name: '', account_key: '', created_at: '', admin: { email: '' } } } })
     }), {
         name: "userStore",
         storage: createJSONStorage(() => sessionStorage)

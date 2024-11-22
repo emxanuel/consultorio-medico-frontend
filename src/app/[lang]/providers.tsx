@@ -4,7 +4,7 @@ import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { QueryClient, QueryClientProvider, isServer } from "@tanstack/react-query";
 import { UserProvider } from "@auth0/nextjs-auth0/client";
 import { NextUIProvider } from "@nextui-org/react";
-import { PayPalScriptProvider } from "@paypal/react-paypal-js";
+import { PayPalScriptProvider, ReactPayPalScriptOptions } from "@paypal/react-paypal-js";
 import DictionaryProvider from "@/dictionaries/dictionary-provider";
 import { getDictionary } from "@/dictionaries/getDictionary";
 import { Language } from "@/types/language";
@@ -34,10 +34,10 @@ function getQueryClient() {
     return browserQueyClient;
 }
 
-const paypalInitialOptions = {
+const paypalInitialOptions: ReactPayPalScriptOptions = {
     clientId: process.env.NEXT_PUBLIC_PAYPAL_CLIENT_ID || '',
-    currency: "USD",
-    intent: "capture"
+    intent: "subscription",
+    vault: true
 }
 
 
