@@ -14,7 +14,7 @@ export default function ModalQR({onclose}: {onclose: () => void}) {
         if (!QRRef.current) return
         toPng(QRRef.current).then((dataUrl) => {
             const link = document.createElement('a')
-            link.download = `Código QR ${actualAccount.name}.png`
+            link.download = `Código QR ${actualAccount?.name}.png`
             link.href = dataUrl
             link.click()
         })
@@ -27,7 +27,7 @@ export default function ModalQR({onclose}: {onclose: () => void}) {
             <div className="w-[90%] max-w-[20rem] py-16 px-10 rounded-md bg-slate-700 flex flex-col items-center gap-20 shadow-md shadow-white/20" onClick={e => e.stopPropagation()}>
                 <QRCode
                     ref={QRRef}
-                    value={`${window.location.origin}/${actualAccount.account_key}/registro`}
+                    value={`${window.location.origin}/${actualAccount?.account_key}/registro`}
                     width={256}
                 />
                 <Button variant="bordered" fullWidth onClick={downloadQR}>Descargar QR</Button>

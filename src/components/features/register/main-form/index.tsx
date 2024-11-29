@@ -34,7 +34,7 @@ export default function MainForm({ data, readonly }: Props) {
     const { user } = userStore()
     const actualAccount = user.actualAccount
     const createClientMutation = useMutation({
-        mutationFn: () => createPatient(formData, actualAccount.account_key)
+        mutationFn: () => createPatient(formData, actualAccount?.account_key || '')
     })
     
 

@@ -23,7 +23,7 @@ const ConsultationsList: React.FC<Props> = () => {
     const { user } = userStore()
     const actualAccount = user.actualAccount
     const token = user.token
-    const { consultationsQuery } = useConsultations(name, from, to, statuses, actualAccount.account_key as string, token);
+    const { consultationsQuery } = useConsultations(name, from, to, statuses, actualAccount?.account_key as string, token);
 
     useEffect(() => {
         consultationsQuery.refetch()
