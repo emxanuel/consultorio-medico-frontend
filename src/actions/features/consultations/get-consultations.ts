@@ -10,16 +10,17 @@ export const getConsultations = async (
   token: string
 ) => {
   try {
-
     let query = `?accountKey=${accountKey}&name=${name}&`;
     if (from && to) {
-      query = query + `dateRange=${dayjs(from).format("YYYY-MM-DD")},${dayjs(to).format("YYYY-MM-DD")}&`;
+      query =
+        query +
+        `dateRange=${dayjs(from).format("YYYY-MM-DD")},${dayjs(to).format(
+          "YYYY-MM-DD"
+        )}&`;
     }
     statuses.map((status) => {
-      query = query + (`${status}=true&`);
+      query = query + `${status}=true&`;
     });
-
-    console.log(token)
     const response = await api.get(`/visits${query}`, {
       headers: {
         Authorization: `Bearer ${token}`,

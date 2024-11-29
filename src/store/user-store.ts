@@ -1,10 +1,10 @@
 import { create } from "zustand";
-import { persist, createJSONStorage } from "zustand/middleware";
+import { persist } from "zustand/middleware";
 
 export type User = {
     email: string;
     accounts: Array<unknown>;
-    actualAccount: Account;
+    actualAccount: Account | undefined;
     token: string;
 };
 
@@ -45,7 +45,6 @@ export const userStore = create(
         setActualAccount: (actualAccount: Account) => set((state: { user: User }) => ({ user: { ...state.user, actualAccount } })),
         logout: () => set({ user: { email: '', accounts: [], token: '', actualAccount: { name: '', account_key: '', created_at: '', admin: { email: '' } } } })
     }), {
-        name: "userStore",
-        storage: createJSONStorage(() => sessionStorage)
+        name: "user-store",
     })
 )

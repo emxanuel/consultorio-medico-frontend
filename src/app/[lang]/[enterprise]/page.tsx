@@ -1,4 +1,4 @@
-import { getAccount } from "@/actions/common/get-account"
+import { getAccount } from "@/actions/features/accounts/get-account"
 import { getSession } from "@auth0/nextjs-auth0"
 import { redirect } from "next/navigation"
 import { homeImage } from "@/assets"
@@ -9,17 +9,14 @@ import { Language } from "@/types/language"
 
 export default async function Page({params}: {params: {enterprise: string, lang: string}}) {
     const data = await getAccount(params.enterprise)
-    const dictionary = (await getDictionary(params.lang as Language)).home
+    const dictionary = getDictionary(params.lang as Language).home
     const session = await getSession()
     const user = session?.user
 
-    if (user?.nickname === 'admin' && data.admin.email !== 'admin@admin.com'){
-        redirect('/')
+    if (data.admin.email && user?.email !== data.admin.email){
+        redirect('/api/auth/logout')
     }
 
-    if (data && user?.email !== data.admin.email){
-        redirect('/')
-    }
 
     return (
         <div>
