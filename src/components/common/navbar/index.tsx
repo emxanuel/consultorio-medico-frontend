@@ -26,6 +26,7 @@ export default function Navbar({ accessToken }: { accessToken: string }) {
 	const { accountQuery } = useGetAccount(params.enterprise as string, accessToken)
 	const accounts = accountsQuery.data
 	const actualAccount = accountQuery.data
+	console.log(storeUser.actualAccount)
 
 	useEffect(() => {
 		if (accounts) {
@@ -69,7 +70,6 @@ export default function Navbar({ accessToken }: { accessToken: string }) {
 	]
 
 
-
 	return (
 		<Nav className="w-screen bg-white bg-opacity-60" isMenuOpen={isMenuOpen} onMenuOpenChange={setIsMenuOpen}>
 			<NavbarBrand>
@@ -93,8 +93,8 @@ export default function Navbar({ accessToken }: { accessToken: string }) {
 					</DropdownTrigger>
 					<DropdownMenu>
 						{userLinks.map((link, index) => (
-							<DropdownItem key={index}>
-								{link.name === 'Logout' ? <a href={link.url}>{link.name}</a> : <Link prefetch={false} href={user ? link.url : ''}>{link.name}</Link>}
+							<DropdownItem key={index} className="flex">
+								{link.name === dictionary.logout ? <a href={link.url || ''}>{link.name}</a> : <Link className="flex-1" href={link.url || '/'}>{link.name}</Link>}
 							</DropdownItem>
 						))}
 					</DropdownMenu>

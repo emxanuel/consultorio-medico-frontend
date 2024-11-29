@@ -14,49 +14,54 @@ export const verifyAndRedirect = async (
       redirect("/");
     }
     const user = session.user;
+    const accounts = await getAccounts(user?.email);
     const verified = await verifyUser(user?.email);
 
     if (!verified) {
-      redirect("/");
-    }
-    return;
-  }
-
-  const session = await getSession();
-
-  if (!isOnHome) {
-    if (!session || !session.user) {
-      redirect("/");
+      redirect("/api/auth/logout");
+    } else {
+      if (!accounts.some((account) => account.account_key === accountKey)) {
+        redirect("/api/auth/logout");
+      } else{
+        return
+      }
     }
   } else {
-    if (!session || !session.user) {
-      return;
-    }
-  }
+    const session = await getSession();
 
-  const user = session.user;
-  const verified = await verifyUser(user?.email);
-
-  if (!verified) {
-    if (!isOnFinishRegister) {
-      redirect("/finalizar-registro", RedirectType.push);
+    if (!isOnHome) {
+      if (!session || !session.user) {
+        redirect("/");
+      }
     } else {
-      return;
+      if (!session || !session.user) {
+        return;
+      }
     }
-  }
 
-  if (verified) {
+    const user = session.user;
+    const verified = await verifyUser(user?.email);
     const accounts = await getAccounts(user?.email);
 
-    if (
-      accountKey &&
-      !accounts.some((account) => account.account_key === accountKey)
-    ) {
-      redirect("/api/auth/logout");
-    } else if (accounts.length > 1) {
-      redirect("/seleccionar-cuenta");
-    } else {
-      redirect(`/${accounts[0].account_key}`);
+    if (!verified) {
+      if (!isOnFinishRegister) {
+        redirect("/finalizar-registro", RedirectType.push);
+      } else {
+        return;
+      }
+    }
+
+    if (verified) {
+      if (
+        accountKey &&
+        !accounts.some((account) => account.account_key === accountKey)
+      ) {
+        redirect("/api/auth/logout");
+      } else if (accounts.length > 1) {
+        redirect("/seleccionar-cuenta");
+      } else {
+        redirect(`/${accounts[0].account_key}`);
+      }
     }
   }
 };
