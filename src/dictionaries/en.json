@@ -17,6 +17,7 @@
         "register": "Register",
         "consultations": "Consultations",
         "profile": "Profile",
+        "account_selection": "Select Account",
         "logout": "Logout"
     },
     "form_patients_registration": {
@@ -58,7 +59,11 @@
                 "relationship": "Relationship"
             },
             "reason": "Reason for Consultation"
-        }
+        },
+        "inactive_account_message": "This account is not enabled to add new patients. Please, contact the administrator.",
+        "creating_patient": "Creating patient...",
+        "readonly_form": "This form is read-only",
+        "submit": "Send"
     },
     "consultations": {
         "title": "Consultations",
@@ -72,7 +77,32 @@
         "cancel": "Cancel",
         "no_consultations": "No consultations found",
         "diagnosis": "Diagnosis",
-        "reason": "Reason"
+        "reason": "Reason",
+        "inactive_account_message": "You can not access to this section. Activate your account in order to have access."
+    },
+    "account_selection": {
+        "title": "Select Account",
+        "subtitle": "Select the account you want to access",
+        "active": "Active",
+        "inactive": "Inactive"
+    },
+    "profile": {
+        "sidebar": {
+            "profile": "Profile",
+            "license": "License",
+            "settings": "Settings",
+            "security": "Security"
+        },
+        "license": {
+            "title": "License",
+            "active_account": {
+                "title": "Active Account"
+            },
+            "inactive_account": {
+                "title": "Inactive Account",
+                "message": "Activate your account here: "
+            }
+        }
     },
     "common": {
         "loading": "Loading..."

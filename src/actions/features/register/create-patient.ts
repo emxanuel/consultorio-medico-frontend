@@ -2,7 +2,7 @@ import api from "@/api";
 import { convertFormData } from "@/helpers/features/register/convertTypes";
 import { FormData } from "@/types";
 
-export const createPatient = async (data: FormData, accountKey: string) => {
+export const createPatient = async (data: FormData, accountKey: string, token: string) => {
     const {insurance, patient, emergencyContact, visit} = convertFormData(data);
     try {
         const response = await api.post("/patients", {
@@ -11,6 +11,10 @@ export const createPatient = async (data: FormData, accountKey: string) => {
             emergencyContactInfo: emergencyContact,
             visitInfo: visit,
             accountKey,
+        }, {
+            headers: {
+                Authorization: `Bearer ${token}`,
+            }
         });
         return response.data;
     } catch (error) {

@@ -17,6 +17,7 @@
         "register": "Registro",
         "consultations": "Consultas",
         "profile": "Perfil",
+        "account_selection": "Seleccionar cuenta",
         "logout": "Cerrar sesión"
     },
     "form_patients_registration": {
@@ -58,7 +59,12 @@
                 "relationship": "Parentesco"
             },
             "reason": "Motivo de la consulta"
-        }
+        },
+        "inactive_account_message": "Esta cuenta no está habilitada para agregar nuevos pacientes. Por favor, contacta al administrador.",
+        "readonly_form": "Este formulario es de solo lectura",
+        "creating_patient": "Creando paciente...",
+        "submit": "Registrar"
+
     },
     "consultations": {
         "title": "Consultas",
@@ -72,7 +78,34 @@
         "cancel": "Cancelar",
         "no_consultations": "No se encontraron consultas",
         "diagnosis": "Diagnóstico",
-        "reason": "Motivo"
+        "reason": "Motivo",
+        "inactive_account_message": "Esta cuenta no está habilitada para ver las consultas. Por favor, activa tu cuenta."
+    },
+    "account_selection": {
+        "title": "Seleccionar cuenta",
+        "subtitle": "Por favor, selecciona la cuenta con la que deseas trabajar",
+        "active": "Activa",
+        "inactive": "Inactiva"
+    },
+    "profile": {
+        "sidebar": {
+            "profile": "Perfil",
+            "license": {
+                "title": "Licenciamiento"
+            },
+            "settings": "Configuración",
+            "security": "Seguridad"
+        },
+        "license": {
+            "title": "Licenciamiento",
+            "active_account": {
+                "title": "Cuenta activa"
+            },
+            "inactive_account": {
+                "title": "Cuenta inactiva",
+                "message": "Activa tu cuenta aquí: "
+            }
+        }
     },
     "common": {
         "loading": "Cargando..."

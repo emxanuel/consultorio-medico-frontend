@@ -15,6 +15,7 @@ export type Account = {
     admin: {
         email: string;
     };
+    active: boolean;
 };
 
 interface UserStore {
@@ -36,14 +37,15 @@ export const userStore = create(
                 created_at: '',
                 admin: {
                     email: ''
-                }
+                },
+                active: false
             },
             token: '',
         },
         setUser: (user: User) => set({ user }),
         setAccounts: (accounts: Array<unknown>) => set((state: { user: User }) => ({ user: { ...state.user, accounts } })),
         setActualAccount: (actualAccount: Account) => set((state: { user: User }) => ({ user: { ...state.user, actualAccount } })),
-        logout: () => set({ user: { email: '', accounts: [], token: '', actualAccount: { name: '', account_key: '', created_at: '', admin: { email: '' } } } })
+        logout: () => set({ user: { email: '', accounts: [], token: '', actualAccount: { name: '', account_key: '', created_at: '', active: false, admin: { email: '' } } } })
     }), {
         name: "user-store",
     })

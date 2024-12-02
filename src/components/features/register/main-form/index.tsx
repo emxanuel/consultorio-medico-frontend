@@ -6,7 +6,6 @@ import { Select } from '@nextui-org/select'
 import { SelectItem } from '@nextui-org/select'
 import { DatePicker } from '@nextui-org/date-picker'
 import { Textarea } from '@nextui-org/react'
-// import { Input, Select, SelectItem } from '@nextui-org/react'
 import { ChangeEvent, MouseEvent, useEffect, useState } from 'react'
 import { FormData } from '@/types'
 import { MaritalStatus, PrimaryInsuredRelationship, Gender } from '@/types'
@@ -19,6 +18,7 @@ import dayjs from 'dayjs'
 import { userStore } from '@/store/user-store'
 import { useMutation } from '@tanstack/react-query'
 import { useDictionary } from '@/dictionaries/dictionary-provider'
+import useCreateClient from '@/hooks/features/register/useCreateClient'
 
 interface Props {
     data?: FormData,
@@ -33,15 +33,6 @@ export default function MainForm({ data, readonly }: Props) {
     const [message, setMessage] = useState('')
     const { user } = userStore()
     const actualAccount = user.actualAccount
-    const createClientMutation = useMutation({
-        mutationFn: () => createPatient(formData, actualAccount?.account_key || '')
-    })
-    
-
-    const maritalStatuses = Object.values(MaritalStatus).filter((value) => typeof value === 'string')
-    const primaryInsuredRelationships = Object.values(PrimaryInsuredRelationship).filter((value) => typeof value === 'string')
-    const genders = Object.values(Gender).filter((value) => typeof value === 'string')
-
     const [formData, setFormData] = useState<FormData>({
         firstName: "",
         lastName: "",
@@ -71,9 +62,17 @@ export default function MainForm({ data, readonly }: Props) {
         ARSPrimaryInsuredRelationship: PrimaryInsuredRelationship.spouse,
         reason: ""
     })
+    const { createClientMutation } = useCreateClient(formData, actualAccount?.account_key || '', user.token)
+
+
+    const maritalStatuses = Object.values(MaritalStatus).filter((value) => typeof value === 'string')
+    const primaryInsuredRelationships = Object.values(PrimaryInsuredRelationship).filter((value) => typeof value === 'string')
+    const genders = Object.values(Gender).filter((value) => typeof value === 'string')
+
+   
 
     useEffect(() => {
-        if (data){
+        if (data) {
             setFormData(data)
         }
     }, [data])
@@ -116,19 +115,19 @@ export default function MainForm({ data, readonly }: Props) {
                     <Input onChange={handleChange} name='lastName' label={dictionary.form.last_name} value={formData.lastName} isDisabled={readonly} isRequired />
                     <Input onChange={handleChange} name="age" type='number' max={120} label={dictionary.form.age} value={formData.age} isDisabled={readonly} isRequired />
                     <Select value={formData.gender} onChange={(e) => setFormData({ ...formData, gender: e.target.value as Gender })} label={dictionary.form.gender} isDisabled={readonly} isRequired>
-                        {genders.map(g => (
-                            <SelectItem key={g} value={g}>{g}</SelectItem>
+                        {genders.map(gender => (
+                            <SelectItem key={gender} value={gender}>{gender}</SelectItem>
                         ))}
                     </Select>
                     <Select value={formData.maritalStatus} onChange={(e) => setFormData({ ...formData, maritalStatus: e.target.value as MaritalStatus })} label={dictionary.form.marital_status} isDisabled={readonly}>
-                        {maritalStatuses.map(m => (
-                            <SelectItem key={m} value={m}>{m}</SelectItem>
+                        {maritalStatuses.map(status => (
+                            <SelectItem key={status} value={status}>{status}</SelectItem>
                         ))}
                     </Select>
                     {readonly ? (
                         <Input onChange={handleChange} name='birthDate' label={dictionary.form.birthdate} value={dayjs(formData.birthDate).toDate().toLocaleDateString()} isDisabled={readonly} isRequired />
                     ) : (
-                        <DatePicker minValue={today(getLocalTimeZone()).subtract({years: 300})} showMonthAndYearPickers onChange={(e) => setFormData({ ...formData, birthDate: e.toString() })} label={dictionary.form.birthdate} isRequired />
+                        <DatePicker minValue={today(getLocalTimeZone()).subtract({ years: 300 })} showMonthAndYearPickers onChange={(e) => setFormData({ ...formData, birthDate: e.toString() })} label={dictionary.form.birthdate} isRequired />
                     )}
                     <Input onChange={handleChange} name='birthPlace' label={dictionary.form.birth_place} value={formData.birthPlace} isDisabled={readonly} />
                     <Input onChange={handleChange} name='nationality' label={dictionary.form.nationality} value={formData.nationality} isDisabled={readonly} />
@@ -178,11 +177,12 @@ export default function MainForm({ data, readonly }: Props) {
                 </div>
             </div>
             <Textarea isDisabled={readonly} value={formData.reason} onChange={handleChange} name='reason' label='Motivo de la consulta' isRequired />
-            {createClientMutation.isPending && <p>Creando paciente...</p>}
+            {createClientMutation.isPending && <p>{dictionary.creating_patient}</p>}
             {message && <p>{message}</p>}
-            {readonly && <p>Este formulario es solo de lectura</p>}
-            {readonly ?? <Button isDisabled={createClientMutation.isPending} onClick={handleClick} className='bg-[#0070f3] text-white h-12'>Enviar</Button>}
-            
+            {readonly && <p>{dictionary.readonly_form}</p>}
+            {readonly ?? <Button isDisabled={createClientMutation.isPending || !user.actualAccount?.active} onClick={handleClick} className='bg-[#0070f3] text-white h-12'>{dictionary.submit}</Button>}
+            {!user.actualAccount?.active && <p>{dictionary.inactive_account_message}</p>}
+
         </form>
     )
 }

@@ -13,7 +13,17 @@ import { useDictionary } from "@/dictionaries/dictionary-provider";
 interface Props {
 }
 
-const ConsultationsList: React.FC<Props> = () => {
+const ConsultationsInactiveAccount = () => {
+    const dictionary = useDictionary().consultations
+
+    return (
+        <div className="p-[12px]">
+            <p>{dictionary.inactive_account_message}</p>
+        </div>
+    )
+}
+
+const ConsultationsActiveAccount: React.FC<Props> = () => {
     const dictionary = useDictionary()
 
     const [name, setName] = useState('')
@@ -49,6 +59,15 @@ const ConsultationsList: React.FC<Props> = () => {
                 />
             ))}
         </div>
+    )
+}
+
+const ConsultationsList: React.FC<Props> = () => {
+    const { user } = userStore()
+    return (
+        <>
+            {user.actualAccount?.active ? <ConsultationsActiveAccount /> : <ConsultationsInactiveAccount />}
+        </>
     )
 }
 

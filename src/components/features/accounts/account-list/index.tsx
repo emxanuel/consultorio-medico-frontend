@@ -4,6 +4,7 @@ import { userStore } from "@/store/user-store"
 import { useGetAccounts } from "@/hooks/features/accounts/useGetAccounts"
 import Link from "next/link"
 import { useUser } from "@auth0/nextjs-auth0/client"
+import { useDictionary } from "@/dictionaries/dictionary-provider"
 
 interface IProps {
   token: string
@@ -12,6 +13,7 @@ interface IProps {
 export default function AccountList ({ token }: IProps) { 
   const { user } = useUser()
   const { accountsQuery } = useGetAccounts(user?.email || '', token)
+  const dictionary = useDictionary().account_selection
   return (
     accountsQuery.isLoading || !Array.isArray(accountsQuery?.data) ? (
       <></>
@@ -20,7 +22,7 @@ export default function AccountList ({ token }: IProps) {
         {accountsQuery.data?.map((account) => (
           <Link href={`/${account.account_key}`} key={account.account_key}>
             <h2>{account.name}</h2>
-            <p>{account.account_key}</p>
+            <p>{account.active? dictionary.active : dictionary.inactive}</p>
           </Link>
         ))}
       </div>

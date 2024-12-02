@@ -28,7 +28,6 @@ export const getConsultations = async (
     });
     return response.data;
   } catch (error) {
-    console.log(error);
     throw new Error(String(error));
   }
 };

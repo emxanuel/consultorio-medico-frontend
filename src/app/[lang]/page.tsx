@@ -19,7 +19,6 @@ export default async function Page({ params }: { params: IParams }) {
                 {dictionary.sign_up.welcome}
             </h1>
             <Login />
-            <PaypalButton />
         </main>
     )
 }

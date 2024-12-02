@@ -7,7 +7,6 @@ interface IParams {
 }
 
 export default async function Page({ params }: { params: IParams }) {
-    console.log('isOnFinishRegister', true)
     await verifyAndRedirect(undefined, true)
     const dictionary = await getDictionary(params.lang as Locale)
     return (
