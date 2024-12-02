@@ -54,13 +54,13 @@ export const verifyAndRedirect = async (
     if (verified) {
       if (
         accountKey &&
-        !accounts.some((account) => account.account_key === accountKey)
+        !accounts.some((account) => account?.account_key === accountKey)
       ) {
         redirect("/api/auth/logout");
       } else if (accounts.length > 1) {
         redirect("/seleccionar-cuenta");
       } else {
-        redirect(`/${accounts[0].account_key}`);
+        redirect(`/${accounts[0]?.account_key}`);
       }
     }
   }
