@@ -77,9 +77,7 @@ export default function Navbar({ accessToken }: { accessToken: string }) {
 		<Nav className="w-screen bg-white bg-opacity-60" isMenuOpen={isMenuOpen} onMenuOpenChange={setIsMenuOpen}>
 			<NavbarBrand>
 				<Link href={storeUser ? `/${storeUser.actualAccount?.account_key}` : ''}>
-					{actualAccount && actualAccount?.admin.email === 'admin@admin.com' && <Image src={logo.src} alt="Logo" width={200} height={100} />}
-
-					{actualAccount && actualAccount?.admin.email !== 'admin@admin.com' && <h1>{storeUser.actualAccount?.name}</h1>}
+					{<h1>{storeUser.actualAccount?.name}</h1>}
 				</Link>
 			</NavbarBrand>
 			<>
