@@ -13,7 +13,7 @@ export default async function Page({params}: {params: {enterprise: string, lang:
     const session = await getSession()
     const user = session?.user
 
-    if (data.admin.email && user?.email !== data.admin.email){
+    if (data?.admin?.email && user?.email !== data?.admin?.email){
         redirect('/api/auth/logout')
     }
 
