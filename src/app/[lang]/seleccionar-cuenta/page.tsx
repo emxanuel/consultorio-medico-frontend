@@ -12,8 +12,8 @@ export default async function SelectAccountPage ({ params }: {params: IParams}) 
   const token = session?.accessToken
   const dictionary = getDictionary(params.lang as Locale).account_selection
   return (
-    <main>
-      <h1>{dictionary.title}</h1>
+    <main className="max-w-3xl w-screen mx-auto p-4 space-y-6">
+      <h1 className="text-2xl font-bold text-center mb-6">{dictionary.title}</h1>
       <AccountList token={token || ''}/>
     </main>
   )

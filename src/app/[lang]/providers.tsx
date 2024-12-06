@@ -9,6 +9,7 @@ import DictionaryProvider from "@/dictionaries/dictionary-provider";
 import { getDictionary } from "@/dictionaries/getDictionary";
 import { Language } from "@/types/language";
 import { useParams } from "next/navigation";
+import ModalActivateAccount from "@/components/common/modal-activate-account";
 
 let browserQueyClient: QueryClient | undefined = undefined;
 
@@ -56,6 +57,7 @@ const Providers: React.FC<Props> = ({ children }) => {
                     <PayPalScriptProvider options={paypalInitialOptions}>
                         <DictionaryProvider dictionary={dictionary}>
                             {children}
+                            <ModalActivateAccount />
                         </DictionaryProvider>
                     </PayPalScriptProvider>
                 </UserProvider>

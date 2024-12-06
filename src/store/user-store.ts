@@ -23,6 +23,8 @@ interface UserStore {
     setUser: (user: User) => void;
     setAccounts: (accounts: Array<Account>) => void;
     setActualAccount: (actualAccount: Account) => void;
+    hasViewedActivateAccount: boolean;
+    setHasViewedActivateAccount: (hasViewedActivateAccount: boolean) => void;
     logout: () => void;
 }
 
@@ -45,7 +47,9 @@ export const userStore = create(
         setUser: (user: User) => set({ user }),
         setAccounts: (accounts: Array<unknown>) => set((state: { user: User }) => ({ user: { ...state.user, accounts } })),
         setActualAccount: (actualAccount: Account) => set((state: { user: User }) => ({ user: { ...state.user, actualAccount } })),
-        logout: () => set({ user: { email: '', accounts: [], token: '', actualAccount: { name: '', account_key: '', created_at: '', active: false, admin: { email: '' } } } })
+        hasViewedActivateAccount: true,
+        setHasViewedActivateAccount: (hasViewedActivateAccount: boolean) => set({ hasViewedActivateAccount }),
+        logout: () => set({ user: { email: '', accounts: [], token: '', actualAccount: { name: '', account_key: '', created_at: '', active: false, admin: { email: '' } } }, hasViewedActivateAccount: true }),
     }), {
         name: "user-store",
     })

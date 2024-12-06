@@ -180,8 +180,7 @@ export default function MainForm({ data, readonly }: Props) {
             {createClientMutation.isPending && <p>{dictionary.creating_patient}</p>}
             {message && <p>{message}</p>}
             {readonly && <p>{dictionary.readonly_form}</p>}
-            {readonly ?? <Button isDisabled={createClientMutation.isPending || !user.actualAccount?.active} onClick={handleClick} className='bg-[#0070f3] text-white h-12'>{dictionary.submit}</Button>}
-            {!user.actualAccount?.active && <p>{dictionary.inactive_account_message}</p>}
+            {readonly ?? <Button isDisabled={createClientMutation.isPending} onClick={handleClick} className='bg-[#0070f3] text-white h-12'>{dictionary.submit}</Button>}
 
         </form>
     )
