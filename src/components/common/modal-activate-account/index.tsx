@@ -8,7 +8,7 @@ interface Props {
 }
 
 export default function ModalActivateAccount() {
-  const { hasViewedActivateAccount, setHasViewedActivateAccount } = userStore()
+  const { hasViewedActivateAccount, setHasViewedActivateAccount, user } = userStore()
   
   const handleHasViewed = () => {
     setHasViewedActivateAccount(true)
@@ -22,7 +22,7 @@ export default function ModalActivateAccount() {
         </p>
         <div className="flex justify-end gap-2 p-2 w-full">
           <Button onClick={handleHasViewed} className="flex justify-end space-x-4 w-10 h-10" color="danger" variant="bordered">Cancel</Button>
-          <Link onClick={handleHasViewed} href='/perfil/licenciamiento' className="bg-green-400 rounded-lg p-2 text-white">Activate</Link>
+          <Link onClick={handleHasViewed} href={`${user.actualAccount?.account_key}/perfil/licenciamiento`} className="bg-green-400 rounded-lg p-2 text-white">Activate</Link>
         </div>
       </ModalContent>
     </Modal>
