@@ -127,7 +127,7 @@ export default function MainForm({ data, readonly }: Props) {
                     {readonly ? (
                         <Input onChange={handleChange} name='birthDate' label={dictionary.form.birthdate} value={dayjs(formData.birthDate).toDate().toLocaleDateString()} isDisabled={readonly} isRequired />
                     ) : (
-                        <DatePicker minValue={today(getLocalTimeZone()).subtract({ years: 300 })} showMonthAndYearPickers onChange={(e) => setFormData({ ...formData, birthDate: e.toString() })} label={dictionary.form.birthdate} isRequired />
+                        <DatePicker minValue={undefined} showMonthAndYearPickers onChange={(e) => setFormData({ ...formData, birthDate: e?.toString() || '' })} label={dictionary.form.birthdate} isRequired />
                     )}
                     <Input onChange={handleChange} name='birthPlace' label={dictionary.form.birth_place} value={formData.birthPlace} isDisabled={readonly} />
                     <Input onChange={handleChange} name='nationality' label={dictionary.form.nationality} value={formData.nationality} isDisabled={readonly} />

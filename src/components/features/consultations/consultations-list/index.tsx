@@ -28,8 +28,8 @@ const ConsultationsActiveAccount = () => {
     const dictionary = useDictionary()
 
     const [name, setName] = useState('')
-    const [from, setFrom] = useState('')
-    const [to, setTo] = useState('')
+    const [from, setFrom] = useState<string | null>(null)
+    const [to, setTo] = useState<string | null>(null)
     const [statuses, setStatuses] = useState<string[]>(['pendient'])
     const { user } = userStore()
     const actualAccount = user.actualAccount

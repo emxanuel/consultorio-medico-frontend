@@ -38,7 +38,7 @@ export default function DrawerPatientHistory({ name, documentId }: Props) {
         <DrawerContent>
           {(onClose) => (
             <>
-              <DrawerHeader className="flex flex-col gap-1 font-semibold">{dictionary.consultations.medical_record.title}: {name} ({documentId})</DrawerHeader>
+              <DrawerHeader className="flex flex-col gap-1 font-semibold">{dictionary.consultations.medical_record.title} {name} ({documentId})</DrawerHeader>
               <DrawerBody>
                 {
                   consultationsByPatientQuery.isLoading? (
