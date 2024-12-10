@@ -67,7 +67,7 @@
     },
     "consultations": {
         "title": "Consultations",
-        "search": "Search by name",
+        "search": "Search patient",
         "from": "From",
         "to": "To",
         "pending": "Pending",
@@ -78,7 +78,12 @@
         "no_consultations": "No consultations found",
         "diagnosis": "Diagnosis",
         "reason": "Reason",
-        "inactive_account_message": "You can not access to this section. Activate your account in order to have access."
+        "inactive_account_message": "You can not access to this section. Activate your account in order to have access.",
+        "see_record": "See record",
+        "medical_record": {
+            "title": "Medical record for: ",
+            "close": "Close"
+        }
     },
     "account_selection": {
         "title": "Select Account",

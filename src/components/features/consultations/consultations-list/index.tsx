@@ -11,6 +11,7 @@ import { userStore } from "@/store/user-store";
 import { useDictionary } from "@/dictionaries/dictionary-provider";
 
 interface Props {
+    consultations?: any[]
 }
 
 const ConsultationsInactiveAccount = () => {
@@ -23,7 +24,7 @@ const ConsultationsInactiveAccount = () => {
     )
 }
 
-const ConsultationsActiveAccount: React.FC<Props> = () => {
+const ConsultationsActiveAccount = () => {
     const dictionary = useDictionary()
 
     const [name, setName] = useState('')
@@ -62,8 +63,39 @@ const ConsultationsActiveAccount: React.FC<Props> = () => {
     )
 }
 
-const ConsultationsList: React.FC<Props> = () => {
+interface PreloadedConsultationsProps {
+    consultations: any[]
+}
+
+const PreloadedConsultations: React.FC<PreloadedConsultationsProps> = ({ consultations }) => {
+    return (
+        <div className={styles.container}>
+            {consultations.map((consultation: any, index: number) => (
+                <Consultation
+                    key={index}
+                    firstName={consultation.person.first_name}
+                    lastName={consultation.person.last_name}
+                    reason={consultation.reason}
+                    visit_date={consultation.visit_date}
+                    id={consultation.id}
+                    status={consultation.status}
+                    diagnosis={consultation.diagnosis}
+                    refetch={() => { }}
+                    patient_id={consultation.person.id}
+                    hideDrawer
+                />
+            ))}
+        </div>
+    )
+}
+
+const ConsultationsList: React.FC<Props> = ({ consultations }) => {
     const { user } = userStore()
+
+    if (consultations) {
+        return <PreloadedConsultations consultations={consultations} />
+    }
+
     return (
         <>
             {user.actualAccount?.active ? <ConsultationsActiveAccount /> : <ConsultationsInactiveAccount />}

@@ -6,6 +6,7 @@ import { Button, Textarea } from "@nextui-org/react"
 import { useMutation } from "@tanstack/react-query"
 import MainForm from "@/components/features/register/main-form"
 import { FormData } from "@/types"
+import { X } from "lucide-react"
 
 interface Props {
     action: 'processed' | 'canceled',
@@ -41,6 +42,9 @@ export default function ModalAnswer({ action, visitId, setShowModal, refetch, re
 
     return (
         <div className="fixed top-0 left-0 flex flex-col items-center w-screen bg-black bg-opacity-60 h-full min-h-screen backdrop-blur-sm z-10 overflow-y-scroll select-text cursor-default" onClick={(e) => {e.stopPropagation(); setShowModal(false)}}>
+            <Button className="absolute right-0 mt-28 mr-4" variant="bordered" onClick={() => setShowModal(false)}>
+                <X className="text-white"/>
+            </Button>
             <div className="flex flex-col gap-4 pt-28 w-[90%] max-w-[40rem]" onClick={(e) => e.stopPropagation()}>
                 <h2 className="text-center text-white text-xl pb-4">{readonly? `Consulta ${visitId}` :action === 'processed' ? "Procesar consulta" : "Cancelar consulta"}</h2>
                 {readonly ?? <p className="text-lg text-white">{action === 'processed'? "Por favor, ingrese el diagnóstico de la consulta y la receta" : "Por favor, ingrese el motivo de la cancelación"}</p>}

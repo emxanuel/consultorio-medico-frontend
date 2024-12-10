@@ -8,6 +8,7 @@ import ModalAnswer from '../modal-answer';
 import { usePatient } from '@/hooks/common/usePatient';
 import { FormData, PrimaryInsuredRelationship } from '@/types';
 import { useDictionary } from '@/dictionaries/dictionary-provider';
+import DrawerPatientHistory from '../drawer-patient-history';
 
 interface Props {
     firstName: string;
@@ -18,12 +19,13 @@ interface Props {
     status: number,
     diagnosis: string,
     refetch: () => void,
-    patient_id: number
+    patient_id: number,
+    hideDrawer?: boolean
 }
 
-const Consultation: React.FC<Props> = ({ firstName, lastName, reason, visit_date, id, status, diagnosis, refetch, patient_id }) => {
+const Consultation: React.FC<Props> = ({ firstName, lastName, reason, visit_date, id, status, diagnosis, refetch, patient_id, hideDrawer }) => {
     const dictionary = useDictionary()
-    
+
     const [showModal, setShowModal] = useState(false)
     const [action, setAction] = useState<'processed' | 'canceled'>('processed')
     const { patientQuery } = usePatient(patient_id)
@@ -31,30 +33,30 @@ const Consultation: React.FC<Props> = ({ firstName, lastName, reason, visit_date
     const data: FormData = {
         firstName: requestData?.first_name ?? '',
         lastName: requestData?.last_name ?? '',
-        age: requestData?.age.toString() ??'0',
+        age: requestData?.age.toString() ?? '0',
         gender: requestData?.gender,
         maritalStatus: requestData?.marital_status,
-        birthDate: requestData?.birth_date  ?? '',
-        birthPlace: requestData?.birth_place  ?? '',
-        nationality: requestData?.nationality  ?? '',
+        birthDate: requestData?.birth_date ?? '',
+        birthPlace: requestData?.birth_place ?? '',
+        nationality: requestData?.nationality ?? '',
         religion: requestData?.religion ?? '',
         ocupation: requestData?.occupation ?? '',
-        documentId: requestData?.document_id  ?? '',
-        address: requestData?.address  ?? '',
-        residentialPhone: requestData?.residential_phone ?? ''  ?? '',
-        cellphone: requestData?.cellphone  ?? '',
-        emergencyContactName: requestData?.emergency_contact?.[0]?.name  ?? '',
-        emergencyContactResidentialPhone: requestData?.emergency_contact?.[0]?.residential_phone  ?? '',
-        emergencyContactCellphone: requestData?.emergency_contact?.[0]?.cellphone  ?? '',
-        emergencyContactRelationship: requestData?.emergency_contact?.[0]?.relationship  ?? '',
-        emergencyContactAddress: requestData?.emergency_contact?.[0]?.address  ?? '',
+        documentId: requestData?.document_id ?? '',
+        address: requestData?.address ?? '',
+        residentialPhone: requestData?.residential_phone ?? '' ?? '',
+        cellphone: requestData?.cellphone ?? '',
+        emergencyContactName: requestData?.emergency_contact?.[0]?.name ?? '',
+        emergencyContactResidentialPhone: requestData?.emergency_contact?.[0]?.residential_phone ?? '',
+        emergencyContactCellphone: requestData?.emergency_contact?.[0]?.cellphone ?? '',
+        emergencyContactRelationship: requestData?.emergency_contact?.[0]?.relationship ?? '',
+        emergencyContactAddress: requestData?.emergency_contact?.[0]?.address ?? '',
         hasAssurance: requestData?.insurance?.[0] !== undefined,
-        ARSName: requestData?.insurance?.[0].ars_name  ?? '',
-        ARSCardholder: requestData?.insurance?.[0].ars_cardholder  ?? '',
-        ARSPrimaryInsured: requestData?.insurance?.[0].ars_primary_insured  ?? '',
-        ARSPlan: requestData?.insurance?.[0].ars_plan  ?? '',
-        ARSContractNumber: requestData?.insurance?.[0].ars_contract_number  ?? '',
-        ARSPrimaryInsuredRelationship: requestData?.insurance?.[0].ars_primary_insured_relationship as PrimaryInsuredRelationship  ?? '',
+        ARSName: requestData?.insurance?.[0].ars_name ?? '',
+        ARSCardholder: requestData?.insurance?.[0].ars_cardholder ?? '',
+        ARSPrimaryInsured: requestData?.insurance?.[0].ars_primary_insured ?? '',
+        ARSPlan: requestData?.insurance?.[0].ars_plan ?? '',
+        ARSContractNumber: requestData?.insurance?.[0].ars_contract_number ?? '',
+        ARSPrimaryInsuredRelationship: requestData?.insurance?.[0].ars_primary_insured_relationship as PrimaryInsuredRelationship ?? '',
         reason: reason
 
     }
@@ -70,14 +72,25 @@ const Consultation: React.FC<Props> = ({ firstName, lastName, reason, visit_date
     }
 
     return (
-        <div className={styles.container} onClick={() => status !== 0 && setShowModal(true)}>
+        <div className='flex flex-col w-full max-w-[40rem] px-3 py-1.5 transition ease-in duration-200 rounded-md select-none' onClick={() => status !== 0 && setShowModal(true)}>
             <div className={styles.infoContainer}>
-                <h2 className='text-lg mb-4'><span>{firstName} {lastName}</span> <span>{dayjs(visit_date).toDate().toLocaleDateString()}</span></h2>
+                <div className='flex w-full gap-2.5 justify-between'>
+                    <h2 className='font-bold'>
+                        {firstName} {lastName} ({data.documentId})
+                    </h2>
+                    <span className='text-sm text-gray-600'>{dayjs(visit_date).format('DD/MMM/YYYY')}</span>
+                </div>
                 <p> - {reason}</p>
                 {status === 1 && <p className='text-green-400'>{dictionary.consultations.diagnosis}: {diagnosis}</p>}
                 {status === 2 && <p className='text-red-600'>{dictionary.consultations.diagnosis}: {diagnosis}</p>}
             </div>
-            <div className={styles.buttonsContainer}>
+            <div className='flex gap-3 justify-end'>
+                {!hideDrawer && (
+                    <DrawerPatientHistory 
+                        name={`${firstName} ${lastName}`}
+                        documentId={data.documentId}
+                    />
+                )}
                 {status === 0 && (
                     <>
                         <Button className='bg-white text-green-400 flex items-center border border-green-400 rounded-md duration-300 hover:bg-green-400 hover:text-white gap-2' onClick={handleProcessClick}>

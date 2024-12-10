@@ -68,7 +68,7 @@
     },
     "consultations": {
         "title": "Consultas",
-        "search": "Buscar por nombre",
+        "search": "Buscar paciente",
         "from": "Desde",
         "to": "Hasta",
         "pending": "Pendientes",
@@ -79,7 +79,12 @@
         "no_consultations": "No se encontraron consultas",
         "diagnosis": "Diagnóstico",
         "reason": "Motivo",
-        "inactive_account_message": "Esta cuenta no está habilitada para ver las consultas. Por favor, activa tu cuenta."
+        "inactive_account_message": "Esta cuenta no está habilitada para ver las consultas. Por favor, activa tu cuenta.",
+        "see_record": "Ver historial",
+        "medical_record": {
+            "title": "Historial clínico de: ",
+            "close": "Cerrar"
+        }
     },
     "account_selection": {
         "title": "Seleccionar cuenta",
