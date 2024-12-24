@@ -1,6 +1,7 @@
 import { EmergencyContact } from "./emergency-contacts";
 import { Visit } from "./visits";
 import { Insurance } from "./insurance"
+import { Gender, MaritalStatus } from "./form-data";
 
 export type Patient = {
   id?: number;
