@@ -1,3 +1,5 @@
+import { Patient } from "./patients";
+
 export type Visit = {
   id?: number;
   patient_id?: number;
@@ -6,3 +8,7 @@ export type Visit = {
   diagnosis?: string;
   treatment?: string;
 };
+
+export type IGetVisitsResponse = Visit & {
+  person: Patient;
+}[];

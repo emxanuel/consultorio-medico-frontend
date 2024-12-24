@@ -1,7 +1,7 @@
 "use client"
 
 import { useEffect, useState } from "react"
-import { answerVisit } from "../../../../actions/features/consultations/answer-visit"
+import { answerVisit } from "../../../../actions/features/visits/answer-visit"
 import { Button, Textarea } from "@nextui-org/react"
 import { useMutation } from "@tanstack/react-query"
 import MainForm from "@/components/features/register/main-form"

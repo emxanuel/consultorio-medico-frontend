@@ -1,4 +1,4 @@
-import { getConsultationsByPatient } from "@/actions/features/consultations/get-by-patient"
+import { getConsultationsByPatient } from "@/actions/features/visits/get-by-patient"
 import { useQuery } from "@tanstack/react-query"
 
 export const useConsultationsByPatient = (documentId: string, token: string) => {

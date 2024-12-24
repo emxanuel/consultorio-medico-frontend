@@ -1,4 +1,5 @@
 import api from "@/api";
+import { IGetVisitsResponse } from "@/types";
 import dayjs from "dayjs";
 
 export const getConsultations = async (
@@ -21,7 +22,7 @@ export const getConsultations = async (
     statuses.map((status) => {
       query = query + `${status}=true&`;
     });
-    const response = await api.get(`/visits${query}`, {
+    const response = await api.get<IGetVisitsResponse>(`/visits${query}`, {
       headers: {
         Authorization: `Bearer ${token}`,
       },

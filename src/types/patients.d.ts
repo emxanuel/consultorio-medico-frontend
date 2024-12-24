@@ -1,6 +1,6 @@
-import { EmergencyContact } from "./EmergencyContact";
-import { Visit } from "./Visit";
-import { Insurance } from "./Insurance"
+import { EmergencyContact } from "./emergency-contacts";
+import { Visit } from "./visits";
+import { Insurance } from "./insurance"
 
 export type Patient = {
   id?: number;

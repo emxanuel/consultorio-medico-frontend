@@ -33,8 +33,7 @@ const ConsultationsActiveAccount = () => {
     const [statuses, setStatuses] = useState<string[]>(['pendient'])
     const { user } = userStore()
     const actualAccount = user.actualAccount
-    const token = user.token
-    const { consultationsQuery } = useConsultations(name, from, to, statuses, actualAccount?.account_key as string, token);
+    const { consultationsQuery } = useConsultations(name, from, to, statuses, actualAccount?.account_key as string);
 
     useEffect(() => {
         consultationsQuery.refetch()

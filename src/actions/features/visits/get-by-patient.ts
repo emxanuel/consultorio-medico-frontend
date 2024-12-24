@@ -1,8 +1,9 @@
 import api from "@/api";
+import { IGetVisitsResponse } from "@/types";
 
 export const getConsultationsByPatient = async (documentId: string, token: string) => {
   try {
-    const response = await api.get(`/visits/patient/${documentId}`, {
+    const response = await api.get<IGetVisitsResponse>(`/visits/patient/${documentId}`, {
       headers: {
         Authorization: `Bearer ${token}`,
       },

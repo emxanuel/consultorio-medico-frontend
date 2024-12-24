@@ -1,5 +1,5 @@
 import api from "@/api";
-import { Patient } from "@/types";
+import { Patient } from "@/types/patients";
 
 export const getPatient = async (id: number) => {
     const response = await api.get<Patient>(`/patients/${id}`);

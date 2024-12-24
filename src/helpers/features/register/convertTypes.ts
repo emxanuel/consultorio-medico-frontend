@@ -1,12 +1,8 @@
-import {
-  FormData,
-  Insurance,
-  Patient,
-  EmergencyContact,
-  Gender,
-  MaritalStatus,
-  Visit,
-} from "@/types";
+import { FormData, Gender, MaritalStatus } from "@/types/form-data.d";
+import { Insurance } from "@/types/insurance.d";
+import { Patient } from "@/types/patients.d";
+import { EmergencyContact } from "@/types/emergency-contacts.d";
+import { Visit } from "@/types/visits.d";
 
 export function convertFormData(data: FormData) {
   const patient: Patient = {
