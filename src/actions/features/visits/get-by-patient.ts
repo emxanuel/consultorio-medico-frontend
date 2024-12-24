@@ -1,5 +1,5 @@
 import api from "@/api";
-import { IGetVisitsResponse } from "@/types";
+import { IGetVisitsResponse } from "@/types/visits";
 
 export const getConsultationsByPatient = async (documentId: string, token: string) => {
   try {

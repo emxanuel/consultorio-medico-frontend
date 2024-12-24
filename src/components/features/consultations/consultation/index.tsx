@@ -6,7 +6,7 @@ import { Button } from '@nextui-org/button';
 import { useState } from 'react';
 import ModalAnswer from '../modal-answer';
 import { usePatient } from '@/hooks/common/usePatient';
-import { FormData, PrimaryInsuredRelationship } from '@/types';
+import { FormData, PrimaryInsuredRelationship } from '@/types/form-data';
 import { useDictionary } from '@/dictionaries/dictionary-provider';
 import DrawerPatientHistory from '../drawer-patient-history';
 

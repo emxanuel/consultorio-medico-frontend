@@ -1,5 +1,5 @@
 import { createPatient } from "@/actions/features/register/create-patient";
-import { FormData } from "@/types";
+import { FormData } from "@/types/form-data";
 import { useMutation } from "@tanstack/react-query";
 
 export default function useCreateClient(formData: FormData, accountKey: string, token: string) {

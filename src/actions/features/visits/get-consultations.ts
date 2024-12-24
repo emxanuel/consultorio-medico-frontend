@@ -1,5 +1,5 @@
 import api from "@/api";
-import { IGetVisitsResponse } from "@/types";
+import { IGetVisitsResponse } from "@/types/visits";
 import dayjs from "dayjs";
 
 export const getConsultations = async (

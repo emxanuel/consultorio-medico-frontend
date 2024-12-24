@@ -5,7 +5,7 @@ import { answerVisit } from "../../../../actions/features/visits/answer-visit"
 import { Button, Textarea } from "@nextui-org/react"
 import { useMutation } from "@tanstack/react-query"
 import MainForm from "@/components/features/register/main-form"
-import { FormData } from "@/types"
+import { FormData } from "@/types/form-data"
 import { X } from "lucide-react"
 
 interface Props {

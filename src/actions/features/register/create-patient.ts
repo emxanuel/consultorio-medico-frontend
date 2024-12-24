@@ -1,6 +1,6 @@
 import api from "@/api";
 import { convertFormData } from "@/helpers/features/register/convertTypes";
-import { FormData } from "@/types";
+import { FormData } from "@/types/form-data";
 
 export const createPatient = async (data: FormData, accountKey: string, token: string) => {
     const {insurance, patient, emergencyContact, visit} = convertFormData(data);
