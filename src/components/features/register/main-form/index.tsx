@@ -7,7 +7,7 @@ import { SelectItem } from '@nextui-org/select'
 import { DatePicker } from '@nextui-org/date-picker'
 import { Textarea } from '@nextui-org/react'
 import { ChangeEvent, MouseEvent, useEffect, useState } from 'react'
-import { FormData, MaritalStatus, Gender, PrimaryInsuredRelationship } from '@/types/form-data.d'
+import { FormData, MaritalStatus, Gender, PrimaryInsuredRelationship } from '@/types/form-data'
 
 import { getLocalTimeZone, today } from '@internationalized/date'
 
