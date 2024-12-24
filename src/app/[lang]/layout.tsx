@@ -21,7 +21,7 @@ export default function RootLayout({
   return (
     <html lang="es">
       <body
-        className={`${poppins.className} flex flex-col`}
+        className={`${poppins.className} flex flex-col w-screen`}
       >
           <Providers>
             {children}
