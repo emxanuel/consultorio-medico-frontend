@@ -18,7 +18,8 @@
         "consultations": "Consultations",
         "profile": "Profile",
         "account_selection": "Select Account",
-        "logout": "Logout"
+        "logout": "Logout",
+        "qr_code": "QR register page"
     },
     "form_patients_registration": {
         "title": "Consultation Registration",
@@ -110,6 +111,7 @@
         }
     },
     "common": {
-        "loading": "Loading..."
+        "loading": "Loading...",
+        "download": "Download"
     }
 }

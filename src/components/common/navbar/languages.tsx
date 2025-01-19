@@ -1,3 +1,5 @@
+'use client'
+
 import SpanishFlag from "../flags/spanish"
 import EnglishFlag from "../flags/english"
 import { Dropdown, DropdownMenu, DropdownTrigger, DropdownItem } from "@nextui-org/react"
@@ -16,15 +18,16 @@ const languages = [
   }
 ]
 
-export default function Languages() {
-  const params = useParams()
-  const pathname = usePathname()
-  const currentLang = params.lang
+interface Props {
+  currentLang: string
+}
+
+export default function Languages({ currentLang }: Props) {
 
   const currentLanguage = languages.find(lang => lang.prefix === `${currentLang}`)
   
   const changeLanguage = (lang: string) => {
-    const pathParts = pathname.split('/')
+    const pathParts = window.location.pathname.split('/')
     pathParts[1] = lang
     const newUrl = pathParts.join('/')
     window.location.href = newUrl
@@ -34,8 +37,8 @@ export default function Languages() {
     <div>
       <Dropdown>
         <DropdownTrigger>
-          <div>
-            {currentLanguage?.flag}
+          <div className="flex gap-4">
+            {currentLanguage?.flag} {currentLanguage?.name}
           </div>
         </DropdownTrigger>
         <DropdownMenu>

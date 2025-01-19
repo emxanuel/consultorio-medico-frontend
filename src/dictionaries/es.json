@@ -18,9 +18,10 @@
         "consultations": "Consultas",
         "profile": "Perfil",
         "account_selection": "Seleccionar cuenta",
-        "logout": "Cerrar sesión"
+        "logout": "Cerrar sesión",
+        "qr_code": "QR Página de registro"
     },
-    "form_patients_registration": {
+    "form_patients_registration": { 
         "title": "Registro para consultas",
         "subtitle": "Información del paciente",
         "form": {
@@ -113,6 +114,7 @@
         }
     },
     "common": {
-        "loading": "Cargando..."
+        "loading": "Cargando...",
+        "download": "Descargar"
     }
 }

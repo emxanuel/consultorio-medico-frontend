@@ -14,10 +14,10 @@ export default async function EnterpriseLayout({ children }: { children: ReactNo
     catch (error) {
         redirect('/')
     }
-    
+
     return (
         <main className="flex flex-col w-full">
-            <Navbar accessToken={token as string}/>
+            <Navbar accessToken={token as string} />
             {children}
             <Footer />
         </main>

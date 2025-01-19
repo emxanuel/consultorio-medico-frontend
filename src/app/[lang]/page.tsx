@@ -1,8 +1,10 @@
 import { verifyAndRedirect } from "@/actions/common/verify-and-redirect"
+import { homeImage } from "@/assets"
 import { getDictionary, Locale } from "@/dictionaries/getDictionary"
 import { Button } from "@nextui-org/react"
 import { Heart, Stethoscope } from "lucide-react"
 import Link from "next/link"
+import Image from "next/image"
 
 
 interface IParams {
@@ -15,8 +17,9 @@ export default async function Page({ params }: { params: IParams }) {
     const dictionary = getDictionary(lang as Locale)
 
     return (
-        <main className="min-h-screen w-screen bg-gradient-to-b from-blue-50 to-white flex flex-col items-center justify-center p-4">
-            <div className="w-full max-w-md">
+        <main className="h-screen overflow-hidden relative w-screen bg-black to-white flex flex-col items-center justify-center">
+            <Image className="w-full h-[100vh] md:h-full object-[-29rem] object-cover md:object-[0px] opacity-20" src={homeImage.src} alt="home" width={1280} height={719} />
+            <div className="w-full max-w-md absolute">
                 <div className="mb-8 flex justify-center">
                     <div className="w-32 h-32 bg-blue-100 rounded-full flex items-center justify-center text-blue-500">
                         <span className="text-2xl font-bold">LOGO</span>

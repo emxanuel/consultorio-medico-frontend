@@ -12,7 +12,7 @@ export default async function Page({params}: {params: {lang: string}}) {
   const dictionary = await getDictionary(params.lang as Language)
 
   return (
-    <div className={styles.container}>
+    <div className='flex flex-col items-center flex-1 py-4'>
       <h1 className="text-2xl font-bold">{dictionary.form_patients_registration.title}</h1>
       <MainForm />
     </div>
