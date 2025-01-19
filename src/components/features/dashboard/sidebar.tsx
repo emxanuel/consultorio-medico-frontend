@@ -34,7 +34,6 @@ export function Sidebar({ accountKey, lang }: IProps) {
     { icon: CirclePlus, label: dictionary.register, href: createUrl('registro') },
     { icon: FileText, label: dictionary.consultations, href: createUrl('consultas') },
     { icon: User, label: dictionary.profile, href: createUrl('perfil') },
-    { icon: DoorOpen, label: dictionary.logout, href: '/api/auth/logout' },
   ]
 
   return (
@@ -56,6 +55,15 @@ export function Sidebar({ accountKey, lang }: IProps) {
             </SidebarMenuItem>
           ))}
           <SidebarMenuItem>
+            <a
+              href='/api/auth/logout'
+              className="flex items-center rounded-lg py-2 text-gray-700 hover:bg-gray-200"
+            >
+              <DoorOpen className="h-5 w-5" />
+              <span className="ml-3">{dictionary.logout}</span>
+            </a>
+          </SidebarMenuItem>
+          <SidebarMenuItem>
             <Button onClick={() => setIsModalQrOpen(true)} variant='ghost' className="w-full flex justify-start p-0">
               <QrCode />
               {dictionary.qr_code}
@@ -73,7 +81,7 @@ export function Sidebar({ accountKey, lang }: IProps) {
         </SidebarTrigger>
       </div>
       {isModalQrOpen && (
-        <ModalQR 
+        <ModalQR
           onclose={() => setIsModalQrOpen(false)}
         />
       )}
