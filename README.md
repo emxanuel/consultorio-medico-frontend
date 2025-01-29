@@ -28,7 +28,16 @@ yarn install
 To start the development server, run:
 
 ```bash
-npm start
+npm run dev
+
+or
+
+pnpm dev
+
+or 
+
+yarn dev
+
 ```
 
 This will start the application on `http://localhost:3000`.
