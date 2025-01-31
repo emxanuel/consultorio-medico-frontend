@@ -20,9 +20,10 @@ const languages = [
 
 interface Props {
   currentLang: string
+  showName?: boolean
 }
 
-export default function Languages({ currentLang }: Props) {
+export default function Languages({ currentLang, showName = true }: Props) {
 
   const currentLanguage = languages.find(lang => lang.prefix === `${currentLang}`)
   
@@ -34,11 +35,11 @@ export default function Languages({ currentLang }: Props) {
   }
   
   return (
-    <div>
+    <div className="cursor-pointer">
       <Dropdown>
         <DropdownTrigger>
           <div className="flex gap-4">
-            {currentLanguage?.flag} {currentLanguage?.name}
+            {currentLanguage?.flag} {showName && currentLanguage?.name}
           </div>
         </DropdownTrigger>
         <DropdownMenu>

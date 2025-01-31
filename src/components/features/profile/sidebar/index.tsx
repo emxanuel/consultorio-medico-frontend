@@ -14,26 +14,26 @@ import {
   SidebarMenuItem,
   SidebarTrigger,
 } from "@/components/ui/sidebar"
+import { useDictionary } from "@/dictionaries/dictionary-provider"
 
 
 export function SettingsSidebar() {
   const pathname = usePathname()
   const [isCollapsed, setIsCollapsed] = useState(false)
   const params = useParams()
+  const dictionary = useDictionary().profile.sidebar
   
   const navItems = [
-    { label: "Perfil", icon: User, href: `/${params.lang}/${params.enterprise}/perfil` },
-    { label: "Licenciamiento", icon: Shield, href: `/${params.lang}/${params.enterprise}/perfil/licenciamiento` },
-    { label: "Configuración", icon: Settings, href: `/${params.lang}/${params.enterprise}/perfil/configuracion` },
-    { label: "Seguridad", icon: Lock, href: `/${params.lang}/${params.enterprise}/perfil/seguridad` },
+    { label: dictionary.profile, icon: User, href: `/${params.lang}/${params.enterprise}/perfil` },
+    { label: dictionary.license, icon: Shield, href: `/${params.lang}/${params.enterprise}/perfil/licenciamiento` },
+    { label: dictionary.settings, icon: Settings, href: `/${params.lang}/${params.enterprise}/perfil/configuracion` },
+    { label: dictionary.security, icon: Lock, href: `/${params.lang}/${params.enterprise}/perfil/seguridad` },
   ]
 
   return (
-    <ShadcnSidebar
-      collapsible="icon"
-    >
+    <nav className="flex flex-col h-full w-64 bg-white border-r">
       <SidebarHeader className="border-b p-4">
-        <h2 className="text-lg font-semibold">Settings</h2>
+        <h2 className="text-lg font-semibold">{dictionary.settings}</h2>
       </SidebarHeader>
       <SidebarContent>
         <SidebarMenu>
@@ -61,16 +61,7 @@ export function SettingsSidebar() {
           ))}
         </SidebarMenu>
       </SidebarContent>
-      <div className="mt-auto border-t p-4">
-        <SidebarTrigger>
-          {isCollapsed ? (
-            <ChevronRight className="h-4 w-4" />
-          ) : (
-            <ChevronLeft className="h-4 w-4" />
-          )}
-        </SidebarTrigger>
-      </div>
-    </ShadcnSidebar>
+    </nav>
   )
 }
 

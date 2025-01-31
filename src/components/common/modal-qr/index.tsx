@@ -27,7 +27,7 @@ export default function ModalQR({onclose}: {onclose: () => void}) {
     if (!actualAccount) return null
 
     return (
-        <div className="fixed top-0 left-0 w-screen h-screen bg-black flex flex-col items-center justify-center z-20 bg-opacity-80 backdrop-blur-sm" onClick={onclose}>
+        <div className="fixed top-0 left-0 w-screen h-screen bg-black flex flex-col items-center justify-center z-[90] bg-opacity-80 backdrop-blur-sm" onClick={onclose}>
             <div className="w-[90%] max-w-[20rem] py-16 px-10 rounded-md bg-indigo-200 flex flex-col items-center gap-20 shadow-md shadow-white/20" onClick={e => e.stopPropagation()}>
                 <QRCode
                     ref={QRRef}

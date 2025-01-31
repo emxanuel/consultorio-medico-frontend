@@ -96,9 +96,7 @@
     "profile": {
         "sidebar": {
             "profile": "Perfil",
-            "license": {
-                "title": "Licenciamiento"
-            },
+            "license": "Licenciamiento",
             "settings": "Configuración",
             "security": "Seguridad"
         },
@@ -109,7 +107,9 @@
             },
             "inactive_account": {
                 "title": "Cuenta inactiva",
-                "message": "Activa tu cuenta aquí: "
+                "message": "Activa tu cuenta aquí: ",
+                "cta": "Activar cuenta",    
+                "cta_2": "Elige tu método de pago preferido"
             }
         }
     },

@@ -12,6 +12,7 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
   SidebarTrigger,
+  useSidebar,
 } from "@/components/ui/sidebar"
 import { useState } from 'react'
 import { Button } from '@/components/ui/button'
@@ -27,6 +28,7 @@ export function Sidebar({ accountKey, lang }: IProps) {
   const dictionary = getDictionary(lang).navbar
   const [isCollapsed, setIsCollapsed] = useState(false)
   const [isModalQrOpen, setIsModalQrOpen] = useState(false)
+  const { open } = useSidebar()
 
 
   const navItems = [
@@ -37,10 +39,7 @@ export function Sidebar({ accountKey, lang }: IProps) {
   ]
 
   return (
-    <ShadcnSidebar className="flex h-screen w-64 flex-col border-r py-4 bg-gray-100">
-      <SidebarHeader className='px-4'>
-        <Languages currentLang={lang} />
-      </SidebarHeader>
+    <ShadcnSidebar collapsible='icon' className="flex h-screen w-64 flex-col border-r py-4 bg-gray-100">
       <SidebarContent className="flex-1 overflow-y-auto py-4">
         <SidebarMenu className="space-y-2 px-4">
           {navItems.map((item) => (
@@ -50,7 +49,7 @@ export function Sidebar({ accountKey, lang }: IProps) {
                 className="flex items-center rounded-lg py-2 text-gray-700 hover:bg-gray-200"
               >
                 <item.icon className="h-5 w-5" />
-                <span className="ml-3">{item.label}</span>
+                {open && <span className="ml-3">{item.label}</span>}
               </Link>
             </SidebarMenuItem>
           ))}
@@ -60,14 +59,17 @@ export function Sidebar({ accountKey, lang }: IProps) {
               className="flex items-center rounded-lg py-2 text-gray-700 hover:bg-gray-200"
             >
               <DoorOpen className="h-5 w-5" />
-              <span className="ml-3">{dictionary.logout}</span>
+              {open && <span className="ml-3">{dictionary.logout}</span>}
             </a>
           </SidebarMenuItem>
           <SidebarMenuItem>
             <Button onClick={() => setIsModalQrOpen(true)} variant='ghost' className="w-full flex justify-start p-0">
               <QrCode />
-              {dictionary.qr_code}
+              {open && dictionary.qr_code}
             </Button>
+          </SidebarMenuItem>
+          <SidebarMenuItem>
+            <Languages currentLang={lang} showName={open} />
           </SidebarMenuItem>
         </SidebarMenu>
       </SidebarContent>

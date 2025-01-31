@@ -21,12 +21,12 @@ export default function PaypalButton() {
     <div>
       <PayPalButtons
         disabled={createSubscriptionMutation.isPending}
-        createSubscription={(data, actions) => {
+        createSubscription={(_data, actions) => {
           return actions.subscription.create({
             plan_id: process.env.NEXT_PUBLIC_PAYPAL_PLAN_ID || ''
           })
         }}
-        onApprove={async (data, actions) => {
+        onApprove={async (data) => {
           createSubscriptionMutation.mutate({
             accountKey: params.enterprise as string,
             provider: 'paypal',

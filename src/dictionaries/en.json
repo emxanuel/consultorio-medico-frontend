@@ -106,7 +106,9 @@
             },
             "inactive_account": {
                 "title": "Inactive Account",
-                "message": "Activate your account here: "
+                "message": "Activate your account here: ",
+                "cta": "Activate account",
+                "cta_2": "Choose your preferred payment method"
             }
         }
     },
