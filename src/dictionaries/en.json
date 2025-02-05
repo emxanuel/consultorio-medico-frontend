@@ -84,6 +84,14 @@
         "medical_record": {
             "title": "Medical record for: ",
             "close": "Close"
+        },
+        "table": {
+            "titles": {
+                "patient": "Patient",
+                "reason": "Reason",
+                "date": "Date",
+                "actions": "Actions"
+            }
         }
     },
     "account_selection": {

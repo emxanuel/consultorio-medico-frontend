@@ -11,7 +11,7 @@ import { useDisclosure } from "@nextui-org/react";
 import { Button } from "@nextui-org/button";
 import { userStore } from "@/store/user-store";
 import { useConsultationsByPatient } from "@/hooks/features/consultations/useConsultationsByPatient";
-import ConsultationsList from "../consultations-list";
+import ConsultationsList from "./consultations-list";
 import { useDictionary } from "@/dictionaries/dictionary-provider";
 
 interface Props {
@@ -32,7 +32,7 @@ export default function DrawerPatientHistory({ name, documentId }: Props) {
         isDismissable={false}
         isOpen={isOpen}
         onOpenChange={onOpenChange}
-        size="5xl"
+        size="3xl"
         backdrop="blur"
       >
         <DrawerContent>

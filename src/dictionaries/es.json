@@ -85,6 +85,14 @@
         "medical_record": {
             "title": "Historial clínico de: ",
             "close": "Cerrar"
+        },
+        "table": {
+            "titles": {
+                "patient": "Paciente",
+                "reason": "Motivo",
+                "date": "Fecha",
+                "actions": "Acciones"
+            }
         }
     },
     "account_selection": {

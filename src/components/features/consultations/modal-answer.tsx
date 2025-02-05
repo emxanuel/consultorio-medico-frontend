@@ -1,12 +1,13 @@
 "use client"
 
 import { useEffect, useState } from "react"
-import { answerVisit } from "../../../../actions/features/visits/answer-visit"
+import { answerVisit } from "@/actions/features/visits/answer-visit"
 import { Button, Textarea } from "@nextui-org/react"
 import { useMutation } from "@tanstack/react-query"
 import MainForm from "@/components/features/register/main-form"
 import { FormData } from "@/types/form-data"
 import { X } from "lucide-react"
+import ConsultationDetails from "./consultation-details"
 
 interface Props {
     action: 'processed' | 'canceled',
@@ -19,7 +20,6 @@ interface Props {
 }
 
 export default function ModalAnswer({ action, visitId, setShowModal, refetch, readonly, data, propsDiagnosis }: Props) {
-
     const [diagnosis, setDiagnosis] = useState('')
     const answerMutation = useMutation({
         mutationFn: () => answerVisit(visitId, action, diagnosis),
@@ -41,11 +41,11 @@ export default function ModalAnswer({ action, visitId, setShowModal, refetch, re
     }
 
     return (
-        <div className="fixed top-0 left-0 flex flex-col items-center w-screen bg-black bg-opacity-60 h-full min-h-screen backdrop-blur-sm z-10 overflow-y-scroll select-text cursor-default" onClick={(e) => {e.stopPropagation(); setShowModal(false)}}>
-            <Button className="absolute right-0 mt-28 mr-4" variant="bordered" onClick={() => setShowModal(false)}>
+        <div className="fixed top-0 left-0 flex flex-col md:flex-row-reverse md:justify-center items-center w-screen bg-black bg-opacity-60 h-full min-h-screen backdrop-blur-sm z-10 overflow-y-scroll select-text cursor-default" onClick={(e) => {e.stopPropagation(); setShowModal(false)}}>
+            <Button className="absolute right-0 mt-28 mr-4 top-0" variant="bordered" onClick={() => setShowModal(false)}>
                 <X className="text-white"/>
             </Button>
-            <div className="flex flex-col gap-4 pt-28 w-[90%] max-w-[40rem]" onClick={(e) => e.stopPropagation()}>
+            <div className="flex flex-col gap-4 w-[90%] max-w-[40rem]" onClick={(e) => e.stopPropagation()}>
                 <h2 className="text-center text-white text-xl pb-4">{readonly? `Consulta ${visitId}` :action === 'processed' ? "Procesar consulta" : "Cancelar consulta"}</h2>
                 {readonly ?? <p className="text-lg text-white">{action === 'processed'? "Por favor, ingrese el diagnóstico de la consulta y la receta" : "Por favor, ingrese el motivo de la cancelación"}</p>}
 
@@ -56,7 +56,7 @@ export default function ModalAnswer({ action, visitId, setShowModal, refetch, re
                 <Button color="primary" disabled={answerMutation.isPending || readonly} fullWidth onClick={handleAnswer}>Enviar</Button>
 
             </div>
-            <MainForm readonly data={data}/>
+            <ConsultationDetails data={data}/>
         </div>
     )
 }

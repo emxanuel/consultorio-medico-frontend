@@ -76,9 +76,6 @@ const LicenseInactiveUser = () => {
 
 export default function License () {  
   const { user } = userStore()
-  return (
-    <LicenseInactiveUser /> 
-  )
 
   return (
     user.actualAccount?.active ? <LicenseActiveUser /> : <LicenseInactiveUser />
