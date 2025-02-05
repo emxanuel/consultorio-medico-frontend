@@ -1,5 +1,7 @@
 'use client'
 
+import { Button } from "@/components/ui/button"
+import { Label } from "@/components/ui/label"
 import { useUser } from "@auth0/nextjs-auth0/client"
 import { Input } from "@nextui-org/react"
 import { ChangeEvent, useEffect, useState } from "react"
@@ -29,9 +31,20 @@ export default function UpdateForm() {
     }, [user])
 
     return (
-        <form action="">
-            <Input onChange={handleChange} value={form.firstName} name="firstName" label='Nombre' />
-            <Input onChange={handleChange} value={form.lastName} name="lastName" label='Apellido' />
+        <form className="space-y-4">
+            <div className="grid grid-cols-2 gap-4">
+                <div className="space-y-2">
+                    <Label htmlFor="firstName">Nombre</Label>
+                    <Input id="firstName" name="firstName" value={form.firstName} onChange={handleChange} />
+                </div>
+                <div className="space-y-2">
+                    <Label htmlFor="lastName">Apellido</Label>
+                    <Input id="lastName" name="lastName" value={form.lastName} onChange={handleChange} />
+                </div>
+            </div>
+            <div className="flex justify-end">
+                <Button type="submit">Guardar cambios</Button>
+            </div>
         </form>
     )
 }
