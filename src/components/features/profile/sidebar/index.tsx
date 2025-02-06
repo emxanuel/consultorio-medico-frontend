@@ -21,19 +21,19 @@ export function SettingsSidebar() {
   const pathname = usePathname()
   const [isCollapsed, setIsCollapsed] = useState(false)
   const params = useParams()
-  const dictionary = useDictionary().profile.sidebar
+  const dictionary = useDictionary().settings.sidebar
   
   const navItems = [
-    { label: dictionary.profile, icon: User, href: `/${params.lang}/${params.enterprise}/perfil` },
-    { label: dictionary.license, icon: Shield, href: `/${params.lang}/${params.enterprise}/perfil/licenciamiento` },
-    { label: dictionary.settings, icon: Settings, href: `/${params.lang}/${params.enterprise}/perfil/configuracion` },
-    { label: dictionary.security, icon: Lock, href: `/${params.lang}/${params.enterprise}/perfil/seguridad` },
+    { label: dictionary.profile, icon: User, href: `/${params.lang}/${params.enterprise}/configuracion` },
+    { label: dictionary.license, icon: Shield, href: `/${params.lang}/${params.enterprise}/configuracion/licenciamiento` },
+    { label: dictionary.general, icon: Settings, href: `/${params.lang}/${params.enterprise}/configuracion/general` },
+    { label: dictionary.security, icon: Lock, href: `/${params.lang}/${params.enterprise}/configuracion/seguridad` },
   ]
 
   return (
     <nav className="flex flex-col h-full w-64 bg-white border-r">
       <SidebarHeader className="border-b p-4">
-        <h2 className="text-lg font-semibold">{dictionary.settings}</h2>
+        <h2 className="text-lg font-semibold">{dictionary.title}</h2>
       </SidebarHeader>
       <SidebarContent>
         <SidebarMenu>

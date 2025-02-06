@@ -1,3 +1,4 @@
+import Navbar from "@/components/common/navbar";
 import { Sidebar } from "@/components/features/dashboard/sidebar";
 import { Locale } from "@/dictionaries/getDictionary";
 import { ReactNode } from "react";
@@ -17,7 +18,8 @@ export default function AdminLayout({ children, params }: IProps) {
         accountKey={params.enterprise}
         lang={params.lang as Locale}
       />
-      <div className="h-screen overflow-y-auto flex-1">
+      <div className="h-screen overflow-y-auto flex-1 ">
+        <Navbar accessToken={params.enterprise} />
         {children}
       </div>
     </main>

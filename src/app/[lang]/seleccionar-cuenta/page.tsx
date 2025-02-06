@@ -7,14 +7,16 @@ interface IParams {
 }
 
 
-export default async function SelectAccountPage ({ params }: {params: IParams}) {
+export default async function SelectAccountPage({ params }: { params: IParams }) {
   const session = await getSession()
   const token = session?.accessToken
   const dictionary = getDictionary(params.lang as Locale).account_selection
   return (
-    <main className="max-w-3xl w-screen mx-auto p-4 space-y-6">
-      <h1 className="text-2xl font-bold text-center mb-6">{dictionary.title}</h1>
-      <AccountList token={token || ''}/>
+    <main className="w-screen h-screen p-4">
+      <div className="w-full max-w-3xl mx-auto flex flex-col gap-6">
+        <h1 className="text-2xl font-bold text-center mb-6">{dictionary.title}</h1>
+        <AccountList token={token || ''} />
+      </div>
     </main>
   )
 }

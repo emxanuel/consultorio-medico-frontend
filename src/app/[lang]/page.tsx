@@ -5,6 +5,7 @@ import { Button } from "@nextui-org/react"
 import { Heart, Stethoscope } from "lucide-react"
 import Link from "next/link"
 import Image from "next/image"
+import Languages from "@/components/common/navbar/languages"
 
 
 interface IParams {
@@ -18,6 +19,11 @@ export default async function Page({ params }: { params: IParams }) {
 
     return (
         <main className="h-screen overflow-hidden relative w-screen bg-black to-white flex flex-col items-center justify-center">
+            <div className="absolute top-4 right-4 bg-white p-2 rounded-md shadow-md z-20"> 
+                <Languages
+                    currentLang={lang}
+                />
+            </div>
             <Image className="w-full h-[100vh] md:h-full object-[-29rem] object-cover md:object-[0px] opacity-20" src={homeImage.src} alt="home" width={1280} height={719} />
             <div className="w-full max-w-md absolute">
                 <div className="mb-8 flex justify-center">

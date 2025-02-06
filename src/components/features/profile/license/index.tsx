@@ -11,7 +11,7 @@ import { CheckCircle, CreditCard } from "lucide-react"
 
 const LicenseActiveUser = () => {
   const { user } = userStore()
-  const dictionary = useDictionary().profile.license.active_account
+  const dictionary = useDictionary().settings.license.active_account
 
   return (
     <Card className="w-full mx-auto">
@@ -50,7 +50,7 @@ const LicenseActiveUser = () => {
 
 const LicenseInactiveUser = () => {
   const { user } = userStore()
-  const dictionary = useDictionary().profile.license.inactive_account
+  const dictionary = useDictionary().settings.license.inactive_account
 
   return (
     <Card className="w-full mx-auto">

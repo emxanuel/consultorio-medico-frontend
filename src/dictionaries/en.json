@@ -16,7 +16,7 @@
     "navbar": {
         "register": "Register",
         "consultations": "Consultations",
-        "profile": "Profile",
+        "settings": "Settings",
         "account_selection": "Select Account",
         "logout": "Logout",
         "qr_code": "QR register page"
@@ -100,11 +100,12 @@
         "active": "Active",
         "inactive": "Inactive"
     },
-    "profile": {
+    "settings": {
         "sidebar": {
+            "title": "Settings",
             "profile": "Profile",
             "license": "License",
-            "settings": "Settings",
+            "general": "General",
             "security": "Security"
         },
         "license": {
