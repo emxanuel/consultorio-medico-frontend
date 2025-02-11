@@ -18,7 +18,7 @@ export default function AdminLayout({ children, params }: IProps) {
         accountKey={params.enterprise}
         lang={params.lang as Locale}
       />
-      <div className="h-screen overflow-y-auto flex-1 ">
+      <div className="h-screen overflow-y-auto flex-1 bg-white">
         <Navbar accessToken={params.enterprise} />
         {children}
       </div>

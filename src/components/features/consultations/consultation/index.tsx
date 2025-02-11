@@ -9,6 +9,7 @@ import { usePatient } from '@/hooks/common/usePatient';
 import { FormData, PrimaryInsuredRelationship } from '@/types/form-data';
 import { useDictionary } from '@/dictionaries/dictionary-provider';
 import DrawerPatientHistory from '../drawer-patient-history';
+import useRedirect from '@/hooks/common/useRedirect';
 
 interface Props {
     firstName: string;
@@ -29,6 +30,7 @@ const Consultation: React.FC<Props> = ({ firstName, lastName, reason, visit_date
     const [showModal, setShowModal] = useState(false)
     const [action, setAction] = useState<'processed' | 'canceled'>('processed')
     const { patientQuery } = usePatient(patient_id)
+    const { redirect } = useRedirect()
     const requestData = patientQuery.data
     const data: FormData = {
         firstName: requestData?.first_name!,
@@ -62,17 +64,19 @@ const Consultation: React.FC<Props> = ({ firstName, lastName, reason, visit_date
     }
 
     const handleProcessClick = () => {
-        setAction('processed')
-        setShowModal(true)
+        redirect(`/consultas/${id}/procesar?action=processed`)
     }
 
     const handleCancelClick = () => {
-        setAction('canceled')
-        setShowModal(true)
+        redirect(`/consultas/${id}/procesar?action=canceled`)
+    }
+
+    const handleSeeHistory = () => {
+        redirect(`/consultas/${patient_id}/procesar`)
     }
 
     return (
-        <div className='flex flex-col w-full max-w-[40rem] px-3 py-1.5 transition ease-in duration-200 rounded-md select-none' onClick={() => status !== 0 && setShowModal(true)}>
+        <div className='flex flex-col w-full max-w-[40rem] px-3 py-1.5 transition ease-in duration-200 rounded-md select-none' onClick={handleSeeHistory}>
             <div className={styles.infoContainer}>
                 <div className='flex w-full gap-2.5 justify-between'>
                     <h2 className='font-bold'>

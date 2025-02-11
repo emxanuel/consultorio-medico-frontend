@@ -92,6 +92,24 @@
                 "date": "Date",
                 "actions": "Actions"
             }
+        },
+        "process_page": {
+            "process": {
+                "title": "Process Consultation",
+                "subtitle": "Are you sure you want to process this consultation?",
+                "placeholder": "Diagnosis",
+                "button_label": "Process consultation",
+                "error": "There was an error processing the consultation",
+                "success": "Consultation processed successfully"
+            },
+            "cancel": {
+                "title": "Cancel Consultation",
+                "subtitle": "Are you sure you want to cancel this consultation?",
+                "placeholder": "Reason for cancellation",
+                "button_label": "Cancel consultation",
+                "error": "There was an error canceling the consultation",
+                "success": "Consultation canceled successfully"
+            }
         }
     },
     "account_selection": {

@@ -11,7 +11,6 @@ import { RecentPatientsTable } from "@/components/features/dashboard/recent-pati
 
 export default async function Page({ params }: { params: { enterprise: string, lang: string } }) {
     const data = await getAccount(params.enterprise)
-    const dictionary = getDictionary(params.lang as Language).home
     const session = await getSession()
     const user = session?.user
 
@@ -22,7 +21,7 @@ export default async function Page({ params }: { params: { enterprise: string, l
 
     return (
         <div className="flex flex-1 flex-col overflow-hidden">
-            <main className="flex-1 overflow-x-hidden overflow-y-auto bg-gray-50">
+            <main className="flex-1 overflow-x-hidden overflow-y-auto">
                 <div className="container mx-auto px-6 py-8">
                     <h2 className="text-2xl font-semibold text-gray-900">Dashboard</h2>
                     <div className="mt-4 grid gap-4 md:grid-cols-2 lg:grid-cols-4">

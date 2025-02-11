@@ -44,6 +44,7 @@ export function convertFormData(data: FormData) {
   const visit: Visit = {
     reason: data.reason,
     visit_date: new Date().toISOString(),
+    status: 0,
   };
 
   return { patient, emergencyContact, insurance, visit };

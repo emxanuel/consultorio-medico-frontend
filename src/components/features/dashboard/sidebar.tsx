@@ -39,7 +39,7 @@ export function Sidebar({ accountKey, lang }: IProps) {
 
   return (
     <ShadcnSidebar collapsible='icon' className="flex h-screen w-64 flex-col border-r py-4 bg-gray-100">
-      <SidebarContent className="flex-1 overflow-y-auto py-4">
+      <SidebarContent className="flex-1 overflow-y-auto py-4 bg-gray-100">
         <SidebarMenu className="space-y-2 px-4">
           {navItems.map((item) => (
             <SidebarMenuItem key={item.href}>
@@ -60,7 +60,7 @@ export function Sidebar({ accountKey, lang }: IProps) {
           </SidebarMenuItem>
         </SidebarMenu>
       </SidebarContent>
-      <div className="mt-auto border-t p-4">
+      <div className="mt-auto border-t p-4 bg-gray-100">
         <SidebarTrigger>
           {isCollapsed ? (
             <ChevronRight className="h-4 w-4" />

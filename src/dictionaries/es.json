@@ -93,6 +93,24 @@
                 "date": "Fecha",
                 "actions": "Acciones"
             }
+        },
+        "process_page": {
+            "process": {
+                "title": "Procesar consulta",
+                "subtitle": "Por favor, indique el diagnóstico y el tratamiento",
+                "placeholder": "Diagnóstico",
+                "button_label": "Procesar consulta",
+                "error": "Ha ocurrido un error al cancelar la consulta",
+                "success": "Consulta procesada con éxito"
+            },
+            "cancel": {
+                "title": "Cancelar consulta",
+                "subtitle": "Por favor, indique el motivo de la cancelación",
+                "placeholder": "Motivo de la cancelación",
+                "button_label": "Cancelar",
+                "error": "Ha ocurrido un error al cancelar la consulta",
+                "success": "Consulta cancelada con éxito"
+            }
         }
     },
     "account_selection": {

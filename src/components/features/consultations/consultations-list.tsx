@@ -46,30 +46,32 @@ const ConsultationsActiveAccount = () => {
         <div className='flex flex-col gap-4 w-11/12 max-w-2xl pb-8'>
             <Filter setFrom={setFrom} setName={setName} setTo={setTo} statuses={statuses} setStatuses={setStatuses} />
             {consultationsQuery.isLoading && <p className="p-[12px]">{dictionary.common.loading}</p>}
-            {consultationsQuery.data?.length === 0 && <p className="p-[12px]">{dictionary.consultations.no_consultations}</p>}
-            <Table>
-                <TableHeader>
-                    <TableRow>
-                        <TableHead>{dictionary.consultations.table.titles.patient}</TableHead>
-                        <TableHead>{dictionary.consultations.table.titles.reason}</TableHead>
-                        <TableHead>{dictionary.consultations.table.titles.date}</TableHead>
-                        <TableHead className="text-right">{dictionary.consultations.table.titles.actions}</TableHead>
-                    </TableRow>
-                </TableHeader>
-                <TableBody>
-                    {consultationsQuery.data?.map((consultation: any, index: number) => (
-                        <ConsultationRow 
-                            displayName={`${consultation.person.first_name} ${consultation.person.last_name}`}
-                            reason={consultation.reason}
-                            visitDate={dayjs(consultation.visit_date).format('DD/MMM/YYYY')}
-                            status={consultation.status}
-                            patientId={consultation.person.id}
-                            visitId={consultation.id}
-                            diagnosis={consultation.diagnosis}
-                        />
-                    ))}
-                </TableBody>
-            </Table>  
+            {consultationsQuery.data?.length === 0 ? <p className="p-[12px]">{dictionary.consultations.no_consultations}</p> : (
+
+                <Table>
+                    <TableHeader>
+                        <TableRow>
+                            <TableHead>{dictionary.consultations.table.titles.patient}</TableHead>
+                            <TableHead>{dictionary.consultations.table.titles.reason}</TableHead>
+                            <TableHead>{dictionary.consultations.table.titles.date}</TableHead>
+                            <TableHead className="text-right">{dictionary.consultations.table.titles.actions}</TableHead>
+                        </TableRow>
+                    </TableHeader>
+                    <TableBody>
+                        {consultationsQuery.data?.map((consultation: any, index: number) => (
+                            <ConsultationRow
+                                displayName={`${consultation.person.first_name} ${consultation.person.last_name}`}
+                                reason={consultation.reason}
+                                visitDate={dayjs(consultation.visit_date).format('DD/MMM/YYYY')}
+                                status={consultation.status}
+                                patientId={consultation.person.id}
+                                visitId={consultation.id}
+                                diagnosis={consultation.diagnosis}
+                            />
+                        ))}
+                    </TableBody>
+                </Table>
+            )}
         </div>
     )
 }
@@ -78,7 +80,7 @@ interface PreloadedConsultationsProps {
     consultations: any[]
 }
 
-const PreloadedConsultations: React.FC<PreloadedConsultationsProps> = ({ consultations }) => {
+const PreloadedConsultations = ({ consultations }: PreloadedConsultationsProps) => {
     return (
         <div className='flex flex-col gap-4 w-11/12 max-w-2xl pb-8'>
             {consultations.map((consultation: any, index: number) => (
@@ -100,7 +102,7 @@ const PreloadedConsultations: React.FC<PreloadedConsultationsProps> = ({ consult
     )
 }
 
-const ConsultationsList: React.FC<Props> = ({ consultations }) => {
+const ConsultationsList = ({ consultations }: Props) => {
     const { user } = userStore()
 
     if (consultations) {

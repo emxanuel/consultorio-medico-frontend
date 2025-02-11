@@ -66,7 +66,7 @@ export default function Navbar({ accessToken }: { accessToken: string }) {
 
 
 	return (
-		<Nav className="w-full bg-white bg-opacity-60 z-0" isMenuOpen={isMenuOpen} onMenuOpenChange={setIsMenuOpen}>
+		<Nav className="w-full bg-gray-200/60 z-10" isMenuOpen={isMenuOpen} onMenuOpenChange={setIsMenuOpen}>
 			<NavbarBrand>
 				<Link href={storeUser ? `/${storeUser.actualAccount?.account_key}` : ''}>
 					{<h1>{storeUser.actualAccount?.name}</h1>}

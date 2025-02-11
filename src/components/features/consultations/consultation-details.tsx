@@ -1,7 +1,6 @@
 "use client"
 
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { ScrollArea } from "@/components/ui/scroll-area"
 import { Badge } from "@/components/ui/badge"
 import { CalendarDays, Phone, MapPin, User, Heart, FileText } from "lucide-react"
 import { FormData } from "@/types/form-data"
@@ -14,7 +13,7 @@ interface Props {
 export default function ConsultationDetails({ data }: Props) {
   const dictionary = useDictionary()
   return (
-    <ScrollArea className="h-[calc(40vh-2rem)] px-4" onClick={(e) => e.stopPropagation()}>
+    <div className="px-4" onClick={(e) => e.stopPropagation()}>
       <div className="container mx-auto py-6 space-y-6 max-w-4xl">
         <Card>
           <CardHeader className="flex flex-row items-center justify-between">
@@ -133,7 +132,7 @@ export default function ConsultationDetails({ data }: Props) {
 
         <p className="text-sm text-muted-foreground text-center pb-4">{dictionary.form_patients_registration.readonly_form}</p>
       </div>
-    </ScrollArea>
+    </div>
   )
 }
 

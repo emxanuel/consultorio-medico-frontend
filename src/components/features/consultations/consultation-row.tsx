@@ -7,7 +7,7 @@ import { useState } from "react";
 import { useDictionary } from "@/dictionaries/dictionary-provider";
 import { usePatient } from "@/hooks/common/usePatient";
 import { FormData, PrimaryInsuredRelationship } from "@/types/form-data";
-import DrawerPatientHistory from "./drawer-patient-history";
+import useRedirect from "@/hooks/common/useRedirect";
 
 interface Props {
   displayName: string
@@ -61,17 +61,16 @@ export default function ConsultationRow({
     ARSContractNumber: requestData?.insurance?.[0].ars_contract_number!,
     ARSPrimaryInsuredRelationship: requestData?.insurance?.[0].ars_primary_insured_relationship! as PrimaryInsuredRelationship,
     reason: reason
-
   }
 
+  const { redirect } = useRedirect()
+
   const handleProcessClick = () => {
-    setAction('processed')
-    setShowModal(true)
+    redirect(`/consultas/${visitId}/procesar?action=processed`)
   }
 
   const handleCancelClick = () => {
-    setAction('canceled')
-    setShowModal(true)
+    redirect(`/consultas/${visitId}/procesar?action=canceled`)
   }
 
   return (
@@ -82,10 +81,9 @@ export default function ConsultationRow({
         <TableCell>{visitDate}</TableCell>
         <TableCell className="text-right">
           <div className="flex justify-end gap-2">
-            <DrawerPatientHistory
-              name={displayName}
-              documentId={data.documentId}
-            />
+            <Button variant="ghost" size="sm" onClick={() => redirect(`/pacientes/${data.documentId}/historial`)}>
+              {dictionary.see_record}
+            </Button>
             {status === 0 && (
               <>
                 <Button variant="default" size="sm" className="bg-emerald-500 hover:bg-emerald-600" onClick={handleProcessClick}>

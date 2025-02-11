@@ -45,7 +45,7 @@ export default function DrawerPatientHistory({ name, documentId }: Props) {
                     <p>{dictionary.common.loading}</p>
                   ) : (
                     <ConsultationsList 
-                      consultations={consultationsByPatientQuery.data}
+                      consultations={consultationsByPatientQuery.data?.visits}
                     />
                   )
                 }

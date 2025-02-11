@@ -7,8 +7,18 @@ export type Visit = {
   reason: string;
   diagnosis?: string;
   treatment?: string;
+  status: number;
 };
+
+export type IGetVisitResponse = Visit & {
+  person: Patient;
+}
 
 export type IGetVisitsResponse = Visit & {
   person: Patient;
 }[];
+
+export type IGetVisitsByPatientResponse = {
+  visits: Visit[];
+  patient: Patient;
+}

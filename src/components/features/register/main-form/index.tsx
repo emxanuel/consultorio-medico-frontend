@@ -111,6 +111,7 @@ export default function MainForm({ data, readonly }: Props) {
             <div className={styles.personalInformation}>
                 <h1 className='text-xl'>{dictionary.subtitle}</h1>
                 <div className={styles.inputs}>
+                    <Input onChange={handleChange} name='documentId' label={dictionary.form.id} value={formData.documentId} isDisabled={readonly} isRequired />
                     <Input onChange={handleChange} name='firstName' label={dictionary.form.name} value={formData.firstName} isDisabled={readonly} isRequired />
                     <Input onChange={handleChange} name='lastName' label={dictionary.form.last_name} value={formData.lastName} isDisabled={readonly} isRequired />
                     <Input onChange={handleChange} name="age" type='number' max={120} label={dictionary.form.age} value={formData.age} isDisabled={readonly} isRequired />
@@ -133,7 +134,6 @@ export default function MainForm({ data, readonly }: Props) {
                     <Input onChange={handleChange} name='nationality' label={dictionary.form.nationality} value={formData.nationality} isDisabled={readonly} />
                     <Input onChange={handleChange} name='religion' label={dictionary.form.religion} value={formData.religion} isDisabled={readonly} />
                     <Input onChange={handleChange} name='ocupation' label={dictionary.form.occupation} value={formData.ocupation} isDisabled={readonly} isRequired />
-                    <Input onChange={handleChange} name='documentId' label={dictionary.form.id} value={formData.documentId} isDisabled={readonly} isRequired />
                     <Input onChange={handleChange} name='address' label={dictionary.form.address} value={formData.address} isDisabled={readonly} />
                     <Input onChange={handleChange} name='residentialPhone' label={dictionary.form.residential_phone} value={formData.residentialPhone} isDisabled={readonly} />
                     <Input onChange={handleChange} name='cellphone' label={dictionary.form.phone} value={formData.cellphone} isDisabled={readonly} isRequired />
